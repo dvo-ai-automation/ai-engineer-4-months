@@ -1,0 +1,33 @@
+# Secrets — nooit committen
+.env
+.env.*
+*.key
+secrets.json
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+env/
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+
+# Vector stores / lokale data (maand 3)
+chroma/
+.chroma/
+*.sqlite3
+
+# Jupyter
+.ipynb_checkpoints/
+
+# macOS
+.DS_Store
+
+# Editors
+.vscode/
+.idea/
+
+# Claude Code lokale instellingen
+.claude/settings.local.json
