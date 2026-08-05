@@ -74,7 +74,7 @@ Niets uit je hoofd leren. Goed genoeg begrijpen om het snel op te zoeken, en erm
 
 ### Weekindeling
 
-- [ ] **Week 1 (30 jul – 5 aug):** setup afronden · CS50P start (variabelen, condities, loops, functies) · [prompt 1](prompts/01-python-learning-partner.md) vanaf dag 1 gebruiken
+- [x] **Week 1 (30 jul – 5 aug):** setup afronden · CS50P start (variabelen, condities, loops, functies) · [prompt 1](prompts/01-python-learning-partner.md) vanaf dag 1 gebruiken
 - [ ] **Week 2 (6 – 12 aug):** CS50P collections + file handling/JSON · GitHub Skills · een week lang alles via de terminal doen
 - [ ] **Week 3 (13 – 19 aug):** CS50P exceptions, lichte OOP, venv/pip · **build: CLI-tool** (expense tracker die naar JSON leest/schrijft, 60–100 regels eigen code)
 - [ ] **Week 4 (20 – 26 aug):** HTTP/API's/`requests` · **build: script dat Open-Meteo aanroept** en het resultaat netjes print · SQLBolt afronden

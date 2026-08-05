@@ -24,7 +24,7 @@ Laat het uitleggen, jíj typt.
 
 ## Weekplanning
 
-- [ ] **Week 1 (30 jul – 5 aug)** — setup afronden · CS50P: variabelen, condities, loops, functies
+- [x] **Week 1 (30 jul – 5 aug)** — setup afronden · CS50P: variabelen, condities, loops, functies
 - [ ] **Week 2 (6 – 12 aug)** — CS50P: collections, file handling, JSON · GitHub Skills · een week lang alles via de terminal
 - [ ] **Week 3 (13 – 19 aug)** — CS50P: exceptions, lichte OOP, venv/pip · build de CLI-tool
 - [ ] **Week 4 (20 – 26 aug)** — HTTP/API's/`requests` · build het API-script · SQLBolt
