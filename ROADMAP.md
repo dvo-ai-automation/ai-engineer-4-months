@@ -56,8 +56,8 @@ AI engineering is éérst software engineering. Als deze laag wankelt, wordt de 
 |---|---|---|
 | Python | **CS50P** (Harvard, Introduction to Programming with Python) | cs50.harvard.edu/python |
 | Git & GitHub | **GitHub Skills** (interactief, in GitHub zelf) | skills.github.com |
-| Terminal | korte beginnerscursus, daarna er gewoon in leven | (MIT "Missing Semester" als je dieper wilt) |
-| API's / HTTP | **MDN Web Docs HTTP overview** + **Python `requests` docs** | |
+| Terminal | korte beginnerscursus, daarna er gewoon in leven | (MIT "Missing Semester" als je dieper wilt — missing.csail.mit.edu) |
+| API's / HTTP | **MDN Web Docs HTTP overview** + **Python `requests` docs** | developer.mozilla.org/en-US/docs/Web/HTTP/Overview + requests.readthedocs.io |
 | SQL | **SQLBolt** (~20 korte browserlessen) | sqlbolt.com |
 
 Als CS50P te steil voelt als absolute beginner: de freeCodeCamp Python-cursus op YouTube is een zachtere oprit, maar behandel die als warming-up en kom terug naar CS50P zodra een leeg bestand je niet meer bang maakt.
@@ -82,7 +82,7 @@ Niets uit je hoofd leren. Goed genoeg begrijpen om het snel op te zoeken, en erm
 ### Build targets
 
 - [ ] CLI-tool die iets echts doet (~60–100 regels eigen code). Lelijk mag. Dat jij het schreef niet.
-- [ ] Python-script dat een gratis publieke API zonder key aanroept (Open-Meteo) en schoon geformatteerde output print.
+- [ ] Python-script dat een gratis publieke API zonder key aanroept (Open-Meteo — open-meteo.com/en/docs) en schoon geformatteerde output print.
 
 ### Milestone — af als je dit kunt
 

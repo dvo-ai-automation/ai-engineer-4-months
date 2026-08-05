@@ -13,8 +13,8 @@ Volledige uitwerking: [../ROADMAP.md](../ROADMAP.md#maand-1--python-en-de-plumbi
 
 - Python: **CS50P** — https://cs50.harvard.edu/python
 - Git & GitHub: **GitHub Skills** — https://skills.github.com
-- Terminal: korte beginnerscursus, daarna erin leven (MIT "Missing Semester" als je dieper wilt)
-- API's/HTTP: **MDN HTTP overview** + **Python `requests` docs**
+- Terminal: korte beginnerscursus, daarna erin leven (MIT "Missing Semester" als je dieper wilt — https://missing.csail.mit.edu)
+- API's/HTTP: **MDN HTTP overview** — https://developer.mozilla.org/en-US/docs/Web/HTTP/Overview + **Python `requests` docs** — https://requests.readthedocs.io/en/latest/
 - SQL: **SQLBolt** — https://sqlbolt.com
 
 ## Dagelijks gereedschap
@@ -32,7 +32,7 @@ Laat het uitleggen, jíj typt.
 ## Builds
 
 - [ ] `projecten/expense-tracker/` — CLI-tool die naar JSON leest en schrijft, 60–100 regels eigen code
-- [ ] `projecten/weather-cli/` — script dat de Open-Meteo API (geen key nodig) aanroept en schoon print
+- [ ] `projecten/weather-cli/` — script dat de Open-Meteo API (geen key nodig, https://open-meteo.com/en/docs) aanroept en schoon print
 
 ## Milestone
 
