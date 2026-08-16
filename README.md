@@ -1,6 +1,6 @@
 # AI Engineer in 4 maanden
 
-Publiek leerlogboek van een carrièreswitch: van nul naar hireable AI engineer,
+Publiek leerlogboek van een carrièreswitch: van e-mail marketeer naar hireable AI engineer,
 30 juli – 18 november 2026, bij 15–25 uur per week.
 Alle code die ik onderweg schrijf staat hier — ook de lelijke.
 
