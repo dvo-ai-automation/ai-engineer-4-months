@@ -1,0 +1,1397 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Leerpad — AI engineer in 4 maanden</title>
+<meta name="description" content="Interactief leerpad-dashboard: van nul naar hireable AI engineer in 4 maanden. Voortgang per skill, bouwopdrachten, valkuilen en mijlpalen.">
+<meta property="og:title" content="Leerpad — AI engineer in 4 maanden">
+<meta property="og:description" content="Interactief leerpad-dashboard: van nul naar hireable AI engineer in 4 maanden.">
+<meta property="og:type" content="website">
+<style>
+:root{
+  color-scheme: light;
+  --bg:#f6f7f9; --card:#fff; --ink:#0f172a; --ink-2:#475569; --ink-3:#94a3b8;
+  --line:#e2e8f0; --line-2:#cbd5e1; --accent:#4338ca; --accent-soft:#eef2ff;
+  --radius:12px;
+  --m1:#4338ca; --m2:#0891b2; --m3:#c2410c; --m4:#15803d;
+  --build-bg:#f0fdf4; --build-line:#bbf7d0; --build-ink:#166534;
+  --trap-bg:#fef2f2; --trap-line:#fecaca; --trap-ink:#991b1b;
+  --note-bg:#eef2ff; --note-line:#dfe3ff; --note-ink:#3730a3;
+  --warn-bg:#fffbeb; --warn-line:#fde68a; --warn-ink:#92400e;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;background:var(--bg);color:var(--ink)}
+body{
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  font-size:14px;line-height:1.55;-webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:1120px;margin:0 auto;padding:28px 20px 80px}
+a{color:inherit}
+button{font-family:inherit;font-size:inherit;cursor:pointer}
+h1,h2,h3,h4{text-wrap:balance;margin:0}
+.overflow-x{overflow-x:auto}
+
+/* header */
+.hdr{margin-bottom:22px}
+.hdr .eyebrow{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);font-weight:700;margin-bottom:6px}
+.hdr h1{font-size:24px;font-weight:800;letter-spacing:-.01em}
+.hdr .sub{color:var(--ink-2);margin-top:6px;font-size:14px;max-width:70ch}
+.hdr .meta{display:flex;gap:18px;flex-wrap:wrap;margin-top:14px;font-size:12.5px;color:var(--ink-2)}
+.hdr .meta b{color:var(--ink)}
+
+/* nav */
+.nav{display:flex;gap:4px;flex-wrap:wrap;border-bottom:1px solid var(--line);margin-bottom:22px;padding-bottom:0}
+.nav button{
+  appearance:none;border:1px solid transparent;background:transparent;color:var(--ink-2);
+  padding:9px 13px;border-radius:10px 10px 0 0;font-weight:600;font-size:13px;
+  border-bottom:2px solid transparent;margin-bottom:-1px;transition:color .12s,border-color .12s;
+}
+.nav button:hover{color:var(--ink)}
+.nav button[aria-selected="true"]{color:var(--accent);border-bottom-color:var(--accent)}
+.nav button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+section.tab{display:none}
+section.tab.active{display:block}
+
+/* cards */
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:18px 20px}
+.grid{display:grid;gap:14px}
+.g4{grid-template-columns:repeat(4,1fr)}
+.g2{grid-template-columns:repeat(2,1fr)}
+@media (max-width:820px){.g4{grid-template-columns:repeat(2,1fr)}.g2{grid-template-columns:1fr}}
+@media (max-width:560px){.g4{grid-template-columns:1fr}}
+
+/* stat cards */
+.stat{display:block;width:100%;text-align:left;background:var(--card);border:1px solid var(--line);
+  border-radius:var(--radius);padding:16px 18px;transition:transform .12s,border-color .12s;text-decoration:none}
+.stat:hover{border-color:var(--accent);transform:translateY(-1px)}
+.stat .lbl{font-size:11.5px;color:var(--ink-3);font-weight:700;letter-spacing:.03em;text-transform:uppercase;display:flex;justify-content:space-between;align-items:center}
+.stat .lbl .arrow{opacity:0;transition:opacity .12s,transform .12s;color:var(--accent)}
+.stat:hover .lbl .arrow{opacity:1;transform:translateX(2px)}
+.stat .val{font-size:26px;font-weight:800;margin-top:6px;font-variant-numeric:tabular-nums}
+.stat .val small{font-size:14px;font-weight:600;color:var(--ink-3)}
+.stat .go{font-size:11.5px;color:var(--ink-3);margin-top:8px}
+
+/* section headers */
+.sect-title{display:flex;align-items:baseline;gap:10px;margin:30px 0 12px}
+.sect-title h2{font-size:17px}
+.sect-title .n{font-size:12px;color:var(--ink-3);font-weight:600}
+.sect-title:first-child{margin-top:0}
+
+/* progress ring + bars */
+.ring-row{display:flex;gap:22px;align-items:center;flex-wrap:wrap}
+.ring-row .ring-num{font-size:13px;color:var(--ink-2)}
+.ring-row .ring-num b{color:var(--ink);font-size:16px}
+.bars{display:flex;flex-direction:column;gap:10px;margin-top:4px}
+.bar-row{display:grid;grid-template-columns:150px 1fr 46px;gap:10px;align-items:center;font-size:12.5px}
+.bar-row .name{font-weight:700;color:var(--ink)}
+.bar-track{height:8px;border-radius:5px;background:var(--accent-soft);overflow:hidden}
+.bar-fill{height:100%;border-radius:5px}
+.bar-row .pct{text-align:right;color:var(--ink-2);font-variant-numeric:tabular-nums}
+
+/* next steps + week */
+.step-list{display:flex;flex-direction:column;gap:0}
+.step-item{display:flex;gap:10px;align-items:flex-start;padding:10px 4px;border-bottom:1px solid var(--line);
+  background:none;border-left:none;border-right:none;border-top:none;width:100%;text-align:left}
+.step-item:last-child{border-bottom:none}
+.step-item:hover{background:var(--accent-soft)}
+.step-item .dot{width:7px;height:7px;border-radius:50%;margin-top:6px;flex:none}
+.step-item .txt b{display:block;font-size:13px}
+.step-item .txt span{font-size:11.5px;color:var(--ink-3)}
+.week-list{margin:0;padding-left:18px}
+.week-list li{margin-bottom:6px;font-size:13px}
+
+/* module blocks */
+.mod{border:1px solid var(--line);border-radius:var(--radius);margin-bottom:12px;overflow:hidden;background:var(--card)}
+.mod-head{display:flex;align-items:center;gap:12px;padding:14px 18px;width:100%;background:none;border:none;text-align:left}
+.mod-head:hover{background:var(--bg)}
+.mod-num{width:30px;height:30px;border-radius:9px;display:flex;align-items:center;justify-content:center;
+  color:#fff;font-weight:800;font-size:13px;flex:none}
+.mod-head .ttl{flex:1;min-width:0}
+.mod-head .ttl h3{font-size:15px}
+.mod-head .ttl .doel{font-size:12px;color:var(--ink-2);margin-top:2px}
+.mod-head .pct{font-size:13px;font-weight:700;color:var(--ink-2);font-variant-numeric:tabular-nums}
+.mod-head .chev{transition:transform .15s;color:var(--ink-3)}
+.mod.open .mod-head .chev{transform:rotate(90deg)}
+.mod-body{display:none;padding:0 18px 18px}
+.mod.open .mod-body{display:block}
+.mod-intro{font-size:12.5px;color:var(--ink-2);background:var(--note-bg);border:1px solid var(--note-line);
+  border-radius:9px;padding:10px 12px;margin-bottom:14px}
+
+.blok{padding:14px 0;border-top:1px solid var(--line)}
+.blok:first-child{border-top:none}
+.blok h4{font-size:13.5px;margin-bottom:3px}
+.blok .bi{font-size:12px;color:var(--ink-2);margin-bottom:10px}
+
+.taak{display:flex;gap:10px;padding:8px 8px;border-radius:8px;transition:background .6s}
+.taak:hover{background:var(--bg)}
+.taak.flash{background:var(--warn-bg)}
+.taak input[type=checkbox]{margin-top:3px;width:16px;height:16px;flex:none;accent-color:var(--accent)}
+.taak .body{flex:1;min-width:0}
+.taak label{font-size:13px;font-weight:600;cursor:pointer;display:block}
+.taak.done label{color:var(--ink-3);text-decoration:line-through}
+.taak .expl{font-size:12px;color:var(--ink-2);margin-top:2px}
+.pills{display:flex;gap:6px;flex-wrap:wrap;margin-top:7px}
+.pill{display:inline-flex;align-items:center;gap:4px;font-size:11px;background:var(--bg);color:var(--ink-2);
+  border:1px solid var(--line);border-radius:99px;padding:3px 9px;text-decoration:none;transition:color .12s,border-color .12s}
+.pill:hover{color:var(--accent);border-color:var(--accent)}
+.pill.paid{background:var(--warn-bg);border-color:var(--warn-line);color:var(--warn-ink)}
+
+.box{border-radius:9px;padding:10px 12px;margin-top:10px;font-size:12.5px}
+.box.build{background:var(--build-bg);border:1px solid var(--build-line);color:var(--build-ink)}
+.box.trap{background:var(--trap-bg);border:1px solid var(--trap-line);color:var(--trap-ink)}
+.box .box-lbl{font-weight:800;font-size:10.5px;letter-spacing:.04em;text-transform:uppercase;margin-bottom:4px;display:block}
+.pad{display:inline-block;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:11px;
+  background:#fff;border:1px solid var(--build-line);color:var(--build-ink);border-radius:6px;padding:2px 7px;margin-right:7px}
+
+.milestone{background:var(--note-bg);border:1px solid var(--note-line);border-radius:9px;padding:12px 14px;margin-top:14px}
+.milestone .ms-lbl{font-weight:800;font-size:11px;letter-spacing:.03em;text-transform:uppercase;color:var(--note-ink);margin-bottom:8px}
+.milestone .noot{font-size:12px;color:var(--ink-2);margin-top:8px;font-style:italic}
+
+/* valkuilen */
+.valk{border:1px solid var(--trap-line);background:var(--trap-bg);border-radius:var(--radius);padding:14px 16px;margin-bottom:12px}
+.valk h3{font-size:14px;color:var(--trap-ink)}
+.valk .probleem{font-size:13px;color:var(--ink);margin-top:6px}
+.valk .oplossing{font-size:13px;margin-top:8px;padding-top:8px;border-top:1px solid var(--trap-line)}
+.valk .oplossing b{color:var(--build-ink)}
+
+/* prompts */
+.prompt-card{border:1px solid var(--line);border-radius:var(--radius);background:var(--card);margin-bottom:14px;overflow:hidden}
+.prompt-head{padding:14px 18px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;gap:12px;align-items:flex-start;flex-wrap:wrap}
+.prompt-head h3{font-size:14.5px}
+.prompt-head .when{font-size:11.5px;color:var(--ink-3);font-weight:600;margin-top:3px}
+.prompt-why{font-size:12.5px;color:var(--ink-2);padding:12px 18px;background:var(--note-bg)}
+.prompt-body{position:relative}
+.prompt-body pre{margin:0;padding:16px 18px;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  font-size:12px;line-height:1.6;white-space:pre-wrap;word-break:break-word;background:#0f172a;color:#e2e8f0;max-height:420px;overflow:auto}
+.copy-btn{border:1px solid var(--line-2);background:var(--card);color:var(--ink-2);border-radius:8px;
+  padding:6px 12px;font-size:12px;font-weight:700}
+.copy-btn:hover{border-color:var(--accent);color:var(--accent)}
+.copy-btn.done{border-color:var(--build-line);color:var(--build-ink);background:var(--build-bg)}
+
+/* beslisregels */
+.regel{border:1px solid var(--line);border-radius:var(--radius);background:var(--card);padding:16px 18px;margin-bottom:12px}
+.regel h3{font-size:14.5px;margin-bottom:10px}
+.regel ol{margin:0;padding-left:20px}
+.regel li{font-size:13px;margin-bottom:6px}
+.regel .ctx{font-size:12px;color:var(--ink-2);margin-top:10px;padding-top:10px;border-top:1px solid var(--line)}
+
+/* richtingen */
+.richting{border:1px solid var(--line);border-radius:var(--radius);background:var(--card);padding:16px 18px}
+.richting h3{font-size:14.5px}
+.richting .voor{font-size:11.5px;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.02em;margin-top:4px}
+.richting p{font-size:12.5px;color:var(--ink-2);margin-top:8px}
+
+/* cijfers */
+.chart-card{margin-top:6px}
+.cijfer-src{font-size:11px;color:var(--ink-3);margin-top:10px}
+.stattiles{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:14px}
+@media (max-width:640px){.stattiles{grid-template-columns:1fr}}
+.stattile{border:1px solid var(--line);border-radius:9px;padding:12px 14px}
+.stattile .v{font-size:19px;font-weight:800;font-variant-numeric:tabular-nums}
+.stattile .l{font-size:11.5px;color:var(--ink-2);margin-top:3px}
+
+/* eerlijk */
+.calc{border:1px solid var(--line);border-radius:var(--radius);background:var(--card);padding:18px 20px;margin-top:14px}
+.calc-row{display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+.calc-row input[type=number]{width:80px;padding:8px 10px;border:1px solid var(--line-2);border-radius:8px;font-size:14px;font-variant-numeric:tabular-nums}
+.calc-out{font-size:15px;margin-top:12px}
+.calc-out b{font-size:19px;color:var(--accent)}
+.anchor-table{width:100%;border-collapse:collapse;margin-top:14px;font-size:12.5px}
+.anchor-table th,.anchor-table td{text-align:left;padding:7px 10px;border-bottom:1px solid var(--line);font-variant-numeric:tabular-nums}
+.anchor-table th{color:var(--ink-3);font-weight:700;font-size:11px;text-transform:uppercase}
+.calc-note{font-size:11.5px;color:var(--ink-3);margin-top:10px}
+
+/* footer */
+.foot{margin-top:34px;padding-top:16px;border-top:1px solid var(--line);display:flex;justify-content:space-between;
+  align-items:center;flex-wrap:wrap;gap:10px;font-size:11.5px;color:var(--ink-3)}
+.reset-btn{border:1px solid var(--line-2);background:var(--card);color:var(--ink-2);border-radius:8px;padding:7px 12px;font-weight:700;font-size:12px}
+.reset-btn:hover{border-color:var(--trap-line);color:var(--trap-ink)}
+
+.addendum{font-size:10.5px;color:var(--ink-3);font-style:italic}
+</style>
+<style>
+/* Toevoeging voor de GitHub Pages-versie: terugkoppeling naar de repo. */
+.repo-link{display:inline-flex;align-items:center;gap:6px;margin-top:12px;font-size:12.5px;
+  font-weight:700;color:var(--accent);text-decoration:none;border:1px solid var(--line);
+  background:var(--card);border-radius:8px;padding:7px 12px}
+.repo-link:hover{border-color:var(--accent)}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="hdr">
+    <div class="eyebrow">Leerpad-dashboard</div>
+    <h1>Van nul naar hireable AI engineer in 4 maanden</h1>
+    <div class="sub">Gebaseerd op je eigen ROADMAP.md, die op zijn beurt is gebaseerd op het artikel "You can go from zero to hireable AI engineer in 4 months. Here's the exact path." (@free_ai_guides, 7 juli 2026).</div>
+    <div class="meta">
+      <span><b>Start</b> 30 juli 2026</span>
+      <span><b>Einde</b> 18 november 2026 (16 weken)</span>
+      <span><b>Tempo</b> 15–25 uur per week</span>
+    </div>
+    <a class="repo-link" href="https://github.com/dvo-ai-automation/ai-engineer-4-months">&#8599; Broncode en projecten op GitHub</a>
+  </div>
+
+  <nav class="nav" role="tablist" aria-label="Onderdelen">
+    <button data-tab="overzicht" role="tab" aria-selected="true">Overzicht</button>
+    <button data-tab="valkuilen" role="tab" aria-selected="false">Valkuilen</button>
+    <button data-tab="roadmap" role="tab" aria-selected="false">Roadmap</button>
+    <button data-tab="mijlpalen" role="tab" aria-selected="false">Mijlpalen</button>
+    <button data-tab="builds" role="tab" aria-selected="false">Bouwopdrachten</button>
+    <button data-tab="prompts" role="tab" aria-selected="false">Prompts</button>
+    <button data-tab="beslisregels" role="tab" aria-selected="false">Beslisregels</button>
+    <button data-tab="cijfers" role="tab" aria-selected="false">Cijfers</button>
+    <button data-tab="eerlijk" role="tab" aria-selected="false">Eerlijk</button>
+  </nav>
+
+  <section id="tab-overzicht" class="tab active"></section>
+  <section id="tab-valkuilen" class="tab"></section>
+  <section id="tab-roadmap" class="tab"></section>
+  <section id="tab-mijlpalen" class="tab"></section>
+  <section id="tab-builds" class="tab"></section>
+  <section id="tab-prompts" class="tab"></section>
+  <section id="tab-beslisregels" class="tab"></section>
+  <section id="tab-cijfers" class="tab"></section>
+  <section id="tab-eerlijk" class="tab"></section>
+
+  <div class="foot">
+    <span id="laatstGewijzigd">Nog niets afgevinkt.</span>
+    <button class="reset-btn" id="resetBtn" type="button">Voortgang resetten</button>
+  </div>
+  <div class="addendum">Alle inhoud komt uit ROADMAP.md / het bronartikel. Toevoegingen van het dashboard zelf (zoals de tijdlijnrekenaar) zijn als zodanig gemarkeerd.</div>
+</div>
+
+<script>
+"use strict";
+
+/* ======================= DATAMODEL ======================= */
+/* Alles hieronder komt uit ROADMAP.md, tenzij expliciet gemarkeerd als dashboard-toevoeging. */
+
+const MODS = [
+{
+  id:"m1", num:1, kleur:"#4338ca",
+  naam:"Python en de plumbing",
+  periode:"30 jul – 26 aug",
+  doel:"Een functionele Python-developer worden die een API kan aanroepen, een klein project kan beheren en niet meer hoeft te googelen op basissyntax. Niet expert. Functioneel.",
+  intro:"AI engineering is éérst software engineering. Als deze laag wankelt, wordt de AI-laag nooit betrouwbaar. Dit is het minst spannende deel van de vier maanden en tegelijk het moeilijkste, omdat de meeste mensen hier afhaken.",
+  blokken:[
+    { t:"Python", i:"Fundament van de taal (pick: CS50P, Harvard). Alles wat je vanaf Maand 2 met AI-API's doet staat bovenop deze basis. LET OP — de weekindeling van deze roadmap loopt bewust niet gelijk met de CS50P-colleges: CS50P ordent op didactiek, de roadmap op wat de build nodig heeft. Exceptions staat bij CS50P op plek 3 maar in de roadmap in week 3 (je loopt vóór); File I/O staat bij CS50P op plek 6 maar in de roadmap in week 2 (je loopt achter). Dat is geen fout, en collections/HTTP/SQL zijn überhaupt geen CS50P-colleges. De regel vanaf hier: DOE ELKE PSET, NIET ELKE OPDRACHT — binnen één pset is het grotendeels dezelfde beweging herhaald, dus de derde opdracht leert je nog iets en de zesde niet meer. Voor de psets zelf geldt dat niet: die introduceren elk iets nieuws. Het CS50P final project slaan we over (dat is er voor het certificaat); de expense tracker hieronder is je eindproject. Status per 16 aug 2026: CS50P 0 t/m 6 is af.",
+      taken:[
+        ["CS50P 0 — Functions, Variables: einstein, faces, indoor, playback, tip","VOLLEDIG. Alle opdrachten van dit pset staan als eigen bestanden in je repo (maand-1-fundament/cs50/Functions, Variables/). Kerntaal, dus hier hoort niks overgeslagen te worden.",[["CS50P · Harvard (gratis)","https://cs50.harvard.edu/python/"]]],
+        ["CS50P 1 — Conditionals: bank, deep, extensions, interpreter, meal","VOLLEDIG, 5 van de 5. Staan allemaal in je repo (maand-1-fundament/cs50/Conditionals/).",[]],
+        ["CS50P 2 — Loops: camel, coke, nutrition, plates, twttr","VOLLEDIG, 5 van de 5. Staan allemaal in je repo (maand-1-fundament/cs50/Loops/).",[]],
+        ["CS50P 3 — Exceptions: fuel, grocery, outdated, taqueria","VOLLEDIG, 4 van de 4 — en dit is een week-3-item dat je in week 2 al af had. Hier loop je vóór op de roadmap.",[]],
+        ["CS50P 4 — Libraries: alle 6 opdrachten","VOLLEDIG, 6 van de 6 — meer dan de 2 à 3 die het plan vroeg. adieu, bitcoin, emojize, figlet, game en professor staan in de repo. Bitcoin Price Index was de waardevolle: requests + JSON + een echte API-key, en daarmee de warming-up voor het Open-Meteo script in week 4.",[]],
+        ["CS50P 5 — Unit Tests: alle 4 opdrachten","VOLLEDIG, 4 van de 4. test_bank, test_fuel, test_plates en test_twttr staan in de repo. pytest heeft kunnen inslijten.",[["pytest · docs (gratis)","https://docs.pytest.org/"]]],
+        ["CS50P 6 — File I/O: alle 4 opdrachten","VOLLEDIG, 4 van de 4: lines, pizza, scourgify, shirt. Dit was de harde voorwaarde voor de expense tracker hieronder — die leest en schrijft JSON. Daarmee ligt alles klaar om die build te beginnen.",[]],
+        ["CS50P 7 — Regular Expressions: 2 van de 4 opdrachten","Staat niet in de roadmap en zit niet op het kritieke pad. Genoeg om te weten dat het bestaat en waar je het opzoekt.",[]],
+        ["CS50P 8 — OOP: 1 à 2 van de 3 opdrachten","De roadmap vraagt hier bewust niet om diepgaand OOP te kunnen schrijven, alleen om het te kunnen lezen. Je hebt het in Maand 2 nodig voor Pydantic-modellen — als lezer, niet als ontwerper.",[]],
+        ["CS50P 9 — Et Cetera: virtual environments en pip","Het college wel, de opdrachten optioneel. Om venv/pip gaat het: zonder venv installeer je in Maand 2 geen enkele SDK.",[]]
+      ],
+      build:"CLI-tool die iets echts doet (expense tracker die naar JSON leest/schrijft), ~60–100 regels eigen code. Lelijk mag. Dat jij het schreef niet.",
+      buildPad:"projecten/expense-tracker/",
+      buildLinks:[]
+    },
+    { t:"Git & GitHub", i:"Pick: GitHub Skills (interactief, in GitHub zelf). De eerste gewoonte die je professioneel maakt: zonder versiebeheer bestaat 'elk project op GitHub op de dag dat het af is' niet.",
+      taken:[
+        ["Beheers de kernlus: init, add, commit, push, pull","De basishandeling die je door de hele roadmap heen honderden keren herhaalt.",[["GitHub Skills · interactief (gratis)","https://skills.github.com/"]]],
+        ["Werk met branching en merging","Nodig zodra je meer dan één ding tegelijk aan een project verandert.",[]],
+        ["Schrijf een .gitignore en houd secrets en API-keys erbuiten","Vanaf Maand 2 werk je met API-keys; dit voorkomt dat je die per ongeluk commit.",[]],
+        ["Schrijf een basis-README","Directe voorbereiding op de vijfdelige README-structuur die je in Maand 4 voor je portfolio gebruikt.",[["Zie tabblad Bouwopdrachten","#builds"]]]
+      ]
+    },
+    { t:"Terminal", i:"Pick: korte beginnerscursus, daarna er gewoon in leven. Vanaf het moment dat je met API-keys werkt, kun je niet meer om de terminal heen.",
+      taken:[
+        ["Beheers cd, ls, pwd, mkdir, rm","Navigeren en bestanden beheren zonder Finder/Explorer.",[]],
+        ["Gebruik cat en grep","Bestanden snel inlezen en doorzoeken vanaf de commandline.",[]],
+        ["Draai een Python-script vanaf de terminal","De manier waarop je vanaf nu vrijwel al je code uitvoert.",[]],
+        ["Zet een environment variable","Nodig zodra je met API-keys werkt, vanaf Maand 2.",[["MIT Missing Semester · als je dieper wilt (gratis)","https://missing.csail.mit.edu/"]]]
+      ]
+    },
+    { t:"API's / HTTP", i:"Pick: MDN Web Docs HTTP overview + Python requests docs. Directe voorbereiding op Maand 2: elke LLM-aanroep is in de kern een HTTP-request.",
+      taken:[
+        ["Doe GET- en POST-requests in Python","De twee requesttypes die je in vrijwel elke API-integratie gebruikt.",[["MDN · HTTP overview (gratis)","https://developer.mozilla.org/en-US/docs/Web/HTTP/Overview"],["Python requests · docs (gratis)","https://requests.readthedocs.io/"]]],
+        ["Lees en schrijf JSON in een API-context","Dezelfde JSON-vaardigheid uit het Python-blok, nu toegepast op live API-responses.",[]],
+        ["Ken de statuscodes: 200 ok, 401 verkeerde key, 429 rate limit, 500 serverfout","Zonder dit debug je API-fouten blind.",[]],
+        ["Weet wat een API-key is","Basis voor elke integratie die je vanaf Maand 2 bouwt.",[]],
+        ["Weet dat async/await bestaat","De roadmap vraagt hier bewust geen diepgaande kennis, alleen herkenning.",[]]
+      ],
+      build:"Python-script dat een gratis publieke API zonder key aanroept (Open-Meteo) en schoon geformatteerde output print.",
+      buildPad:"projecten/weather-cli/",
+      buildLinks:[["Open-Meteo · API-docs, geen key nodig (gratis)","https://open-meteo.com/en/docs"]]
+    },
+    { t:"SQL", i:"Pick: SQLBolt (~20 korte browserlessen). De roadmap vraagt hier bewust niet meer dan het minimum: SELECT, WHERE, GROUP BY, JOIN, ORDER BY. NIET ALLE 20 LESSEN DOEN — dat is exact de eerste helft van SQLBolt. De scheidslijn die telt: lezen uit een database hoort erbij, schrijven en tabellen aanmaken niet. De lesnummering hieronder is bij benadering; kijk op de site naar de indeling, niet naar het exacte nummer.",
+      taken:[
+        ["SQLBolt lessen 1–12: SELECT, WHERE, ORDER BY, JOINs, NULLs, aggregates/GROUP BY, HAVING","DIT IS DE OPDRACHT. Alle twaalf doen. Les 12 (Order of execution of a Query) is de waardevolste van de reeks — daar klikt WHERE versus HAVING. Niet overslaan omdat hij saai oogt.",[["SQLBolt · browserlessen (gratis)","https://sqlbolt.com/"]]],
+        ["SQLBolt lessen 13–15: INSERT, UPDATE, DELETE","BONUS, ongeveer 15 minuten. Niet gevraagd door de roadmap, maar nuttig zodra je zelf iets in een database opslaat.",[]],
+        ["SQLBolt 16–18 (CREATE/ALTER/DROP TABLE) en de extra topics: OVERSLAAN","Databasebeheer en subqueries/UNION. Dat is een ander vak dan het jouwe op dit moment. Pak ze pas op als een echt project erom vraagt.",[]]
+      ]
+    }
+  ],
+  mijlpaal:[
+    "Een Python-programma schrijven dat bestanden leest en schrijft, een API aanroept, en zijn eigen errors afhandelt zonder te crashen",
+    "Die code versioneren met Git en in een GitHub-repo hebben staan",
+    "Zonder aarzelen door de terminal bewegen",
+    "Uitleggen wat een HTTP-request is en er één maken in Python",
+    "Een basis-SQL-query draaien"
+  ],
+  mijlpaalNoot:"Dit is het minst spannende deel en tegelijk het moeilijkste, omdat de meeste mensen hier afhaken. Vanaf Maand 2 bouw je mét AI."
+},
+{
+  id:"m2", num:2, kleur:"#0891b2",
+  naam:"Bouwen met LLM-API's",
+  periode:"27 aug – 23 sep",
+  doel:"Echte AI-features bouwen met model-API's. Dit is de kern van het hele vak; alles daarna bouwt hierop voort.",
+  intro:"Diepte in Maand 2 betaalt zich meer terug dan diepte waar dan ook.",
+  blokken:[
+    { t:"Prompting", i:"Pick: Anthropic's interactive prompt engineering tutorial, daarna de officiële prompt-docs van Anthropic en OpenAI als naslag.",
+      taken:[
+        ["Ken het verschil tussen system message en user message","Basisonderscheid waarop alle verdere prompting rust.",[["Anthropic · interactieve tutorial, GitHub-repo (gratis)","https://github.com/anthropics/prompt-eng-interactive-tutorial"],["Anthropic · prompt-docs, naslag (gratis)","https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/overview"],["OpenAI · prompt-docs, naslag (gratis)","https://platform.openai.com/docs/guides/prompt-engineering"]]],
+        ["Pas toe: specificiteit verslaat beleefdheid","Kernregel uit de roadmap voor betere output.",[]],
+        ["Gebruik chain-of-thought en few-shot voorbeelden","Twee technieken die betrouwbaarheid van output direct verhogen.",[]],
+        ["Krijg gevoel voor hoe kleine woordkeuzes grote outputverschillen geven","Dit gevoel bouw je alleen op door zelf te experimenteren, niet door te lezen.",[]]
+      ],
+      build:"Prompt-oefening: één echte taak (bv. een document samenvatten of feedback classificeren), vijf verschillende prompts ervoor schrijven, alle vijf draaien en de outputs naast elkaar leggen.",
+      buildPad:"projecten/prompt-vergelijking/"
+    },
+    { t:"Structured outputs", i:"Pick: Instructor (Python) + Pydantic, met de officiële structured-output docs ernaast. De brug tussen een taalmodel en code die op de output kan vertrouwen.",
+      taken:[
+        ["Definieer een Pydantic-model","Het schema waarmee je afdwingt wat een geldig antwoord is.",[["Pydantic · docs (gratis)","https://docs.pydantic.dev/"]]],
+        ["Geef het schema mee aan de API","Zo dwing je gestructureerde output af in plaats van los te hopen op nette JSON.",[["Instructor · docs (gratis)","https://python.useinstructor.com/"]]],
+        ["Vang weigeringen en onverwachte output af","Nodig zodra je dit in een echte pipeline gebruikt, zoals de bon-/factuurparser.",[]],
+        ["Ken het verschil tussen échte structured outputs (schema afgedwongen) en losse JSON-mode (niet gegarandeerd)","Dit onderscheid bepaalt of je code blind kan vertrouwen op de vorm van de output.",[]]
+      ],
+      build:"Bon-/factuurparser: ruwe rommelige tekst zoals 'Invoice 123, $45.99 for 3 widgets, due March 30' in, schoon gestructureerd object uit (factuurnummer, bedrag, aantal, vervaldatum). Portfoliostuk.",
+      buildPad:"projecten/invoice-parser/",
+      buildLinks:[["Prompt 2 · Structured Data Extraction","#prompts"]],
+      trap:"Bekende faalmodus: het model wikkelt de JSON soms in markdown code fences of zet er een vriendelijke zin voor, waardoor je parser stukloopt. Fix: strip de code fences vóór het parsen, en wees expliciet dat je alléén het JSON-object wilt."
+    },
+    { t:"Tool calling", i:"Pick: OpenAI function calling guide en Anthropic tool use docs naast elkaar lezen, daarna een runnable notebook (OpenAI cookbook). Het mentale model dat de rest van het vak (agents in Maand 3) draagt.",
+      taken:[
+        ["Begrijp het mentale model: het model draait je functies niet zelf","Het model besluit dát een tool nodig is en geeft een gestructureerd verzoek terug met functienaam en argumenten; jouw code voert uit en geeft het resultaat terug. Het model is de beslisser, jouw code zijn de handen.",[["OpenAI · function calling guide (gratis)","https://platform.openai.com/docs/guides/function-calling"],["Anthropic · tool use docs (gratis)","https://docs.anthropic.com/en/docs/build-with-claude/tool-use"]]],
+        ["Werk een runnable notebook door","Zien hoe tool calling in de praktijk werkt, niet alleen lezen.",[["OpenAI Cookbook (gratis)","https://cookbook.openai.com/"]]],
+        ["Schrijf tool-beschrijvingen die het model echt kan gebruiken","De kwaliteit van je tool-beschrijvingen telt zwaarder dan beginners verwachten.",[]]
+      ],
+      build:"Mini-assistent met drie tools: get_weather, calculate, search_notes (die laatste zoekt gewoon in een hardcoded dictionary). Kijken hoe het model zelf de juiste kiest.",
+      buildPad:"projecten/mini-assistent/"
+    },
+    { t:"Conversation state", i:"Pick: messages-documentatie van beide providers. Modellen hebben geen geheugen tussen calls.",
+      taken:[
+        ["Beheer de volledige message-history zelf tussen calls","Een gesprek is iets dat jíj beheert door de volledige history mee te sturen, niet iets dat het model onthoudt.",[["Anthropic · messages-docs (gratis)","https://docs.anthropic.com/en/api/messages"],["OpenAI · conversation state-docs (gratis)","https://platform.openai.com/docs/guides/conversation-state"]]]
+      ],
+      build:"Multi-turn terminal-chatbot die history bijhoudt en een reset-commando heeft.",
+      buildPad:"projecten/terminal-chatbot/"
+    },
+    { t:"Streaming", i:"Pick: officiële streaming-docs + Simon Willison's uitleg van hoe streaming eronder werkt.",
+      taken:[
+        ["Zet stream aan en itereer over de chunks","Basismechaniek van streaming-responses.",[["Anthropic · streaming-docs (gratis)","https://docs.anthropic.com/en/api/streaming"],["OpenAI · streaming-docs (gratis)","https://platform.openai.com/docs/guides/streaming-responses"]]],
+        ["Stel het volledige antwoord samen uit de stukken","Nodig zodra je streaming combineert met bijvoorbeeld structured outputs of logging.",[["Simon Willison · over streaming (gratis)","https://simonwillison.net/tags/llms/"]]]
+      ]
+    },
+    { t:"Kosten en tokens", i:"Vuistregel die echt geld scheelt.",
+      taken:[
+        ["Reken een token op ongeveer driekwart woord, input en output apart geprijsd","Basis voor elke kosteninschatting.",[]],
+        ["Gebruik niet het grootste, duurste model voor simpele taken","De vuistregel uit de roadmap die het meeste geld scheelt.",[]]
+      ]
+    },
+    { t:"Failure handling", i:"Een API-fout mag nooit je hele app slopen.",
+      taken:[
+        ["Vang rate limits op en retry met exponentiële backoff","De Tenacity-library doet dit met één decorator.",[["Tenacity · docs (gratis)","https://tenacity.readthedocs.io/"]]],
+        ["Valideer output vóór je hem vertrouwt","Voorkomt dat een onverwacht modelantwoord verderop in je code een crash veroorzaakt.",[]],
+        ["Laat een onverwacht antwoord nooit je hele app slopen","Kernregel van deze skill.",[]]
+      ]
+    },
+    { t:"Prompt injection", i:"Pick: OWASP-guide. Het grootste beveiligingsrisico in LLM-apps.",
+      taken:[
+        ["Ken de kerndefensies","Laat ongevalideerde modeloutput nooit automatisch consequente acties uitvoeren, en geef je tools de minste toegang die ze nodig hebben.",[["OWASP · Top 10 for LLM Applications (gratis)","https://owasp.org/www-project-top-10-for-large-language-model-applications/"]]]
+      ]
+    }
+  ],
+  mijlpaal:[
+    "Prompts schrijven die betrouwbare output geven voor een gegeven taak",
+    "Gestructureerde JSON uit een model halen met Pydantic en Instructor",
+    "Tool calling opzetten zodat een model jouw Python-functies kan draaien",
+    "Een antwoord realtime streamen",
+    "Multi-turn gespreksgeschiedenis beheren",
+    "De tokenkosten van een request inschatten vóór je hem verstuurt",
+    "API-fouten en slechte output afhandelen zonder crash",
+    "Uitleggen wat prompt injection is"
+  ],
+  mijlpaalNoot:""
+},
+{
+  id:"m3", num:3, kleur:"#c2410c",
+  naam:"RAG en agents",
+  periode:"24 sep – 21 okt",
+  doel:"Systemen bouwen die modellen laten antwoorden uit jóuw documenten, en systemen die zelfstandig meerdere stappen zetten. Dit zijn de meest gevraagde praktische vaardigheden in AI engineering op dit moment.",
+  intro:"De lat: één solide retrieval-systeem, één solide agent, begrijpen waarom elk onderdeel er zit, en het kunnen debuggen als het breekt. RAG in gewone taal: je geeft het model een bibliotheek om dingen in op te zoeken — documenten in chunks knippen, elke chunk omzetten in een reeks getallen die de betekenis vangt, opslaan; bij een vraag: vraag op dezelfde manier omzetten, de chunks vinden waarvan de getallen het dichtst bij liggen, die samen met de vraag aan het model geven. Al het andere is verfijning.",
+  blokken:[
+    { t:"Embeddings", i:"Pick: Stack Overflow blog 'intuitive introduction to text embeddings' (mentaal model) + OpenAI embeddings guide (in code).",
+      taken:[
+        ["Begrijp wat een vector conceptueel is","De kern van hoe retrieval werkt.",[["Stack Overflow · intuïtieve intro tot embeddings (gratis)","https://stackoverflow.blog/2023/11/09/an-intuitive-introduction-to-text-embeddings/"],["OpenAI · embeddings guide (gratis)","https://platform.openai.com/docs/guides/embeddings"]]],
+        ["Begrijp waarom vergelijkbare tekst vergelijkbare vectoren geeft","Dit is de eigenschap die retrieval mogelijk maakt.",[]],
+        ["Meet ruwweg de afstand tussen vectoren","De wiskunde eronder heb je niet nodig.",[]]
+      ],
+      build:"Mini-RAG: 20 zinnen over verwante onderwerpen embedden, functie die bij een nieuwe zin de drie meest vergelijkbare teruggeeft.",
+      buildPad:"projecten/mini-rag/"
+    },
+    { t:"Chunking", i:"Pick: LangChain RecursiveCharacterTextSplitter, chunk size ~500, overlap ~50.",
+      taken:[
+        ["Ken de afruil: te grote chunks verliezen precisie, te kleine verliezen context","De centrale beslissing bij elke RAG-pipeline.",[["LangChain · RecursiveCharacterTextSplitter docs (gratis)","https://python.langchain.com/docs/how_to/recursive_text_splitter/"]]],
+        ["Gebruik chunk size ~500 met overlap ~50 als startpunt","Overlap voorkomt dat je betekenis verliest op de grens tussen twee chunks.",[]]
+      ]
+    },
+    { t:"Vector database", i:"Pick: Chroma, lokaal (pgvector later, als je app al Postgres gebruikt).",
+      taken:[
+        ["Maak een collection aan","Eerste stap om embeddings doorzoekbaar te maken.",[["Chroma · docs (gratis)","https://docs.trychroma.com/"]]],
+        ["Voeg embeddings en metadata (bron, sectie) in","Metadata is wat retrieval later filterbaar maakt.",[]],
+        ["Query op similarity","De kernoperatie van elk retrieval-systeem.",[]],
+        ["Filter op metadata","Indexeringsalgoritmes hoef je niet te snappen.",[]]
+      ]
+    },
+    { t:"Retrieval echt goed maken", i:"Pick voor reranking: Cohere reranking-docs. Het verschil tussen speelgoed en een systeem waar iemand 'alleen resultaten uit het Q4-rapport' kan vragen.",
+      taken:[
+        ["Pas metadata-filtering toe","Maakt retrieval bruikbaar voor specifieke, afgebakende vragen.",[]],
+        ["Voeg reranking toe: breed ophalen, dan terugscoren naar de beste paar","Verbetert precisie zonder dat je de eerste ophaal-stap hoeft te vertrouwen.",[["Cohere · reranking-docs (gratis)","https://docs.cohere.com/docs/rerank-overview"]]]
+      ],
+      trap:"De meeste RAG-fouten zijn retrieval-fouten, geen modelfouten. Faalmodi: vraag en chunk matchen niet in getallenruimte (herschrijf de query) · relevante info verdeeld over twee chunks (meer overlap) · juiste chunk bestond maar haalde de top niet (haal er meer op, rerank terug). Kijk altijd eerst wat er opgehaald werd voordat je het model de schuld geeft."
+    },
+    { t:"Grounding en citaties", i:"De prompt die het artikel boven alle andere aanraadt te bookmarken.",
+      taken:[
+        ["Geef de broninformatie per chunk mee in je prompt en instrueer het model die te citeren","Basis van betrouwbare, controleerbare RAG-antwoorden.",[["Prompt 3 · Grounded RAG Answering","#prompts"]]]
+      ]
+    },
+    { t:"RAG-framework", i:"Pick: LlamaIndex (search-first).",
+      taken:[
+        ["Werk met LlamaIndex als search-first framework","Bundelt chunking, opslag en retrieval in één workflow.",[["LlamaIndex · docs (gratis)","https://docs.llamaindex.ai/"]]]
+      ],
+      build:"'Chat met je documenten'-app (hoofdportfoliostuk): 10–20 PDF's of tekstbestanden ingesten, vraag in → relevante chunks ophalen met reranking → geciteerd antwoord terug, met simpele interface.",
+      buildPad:"projecten/chat-met-documenten/"
+    },
+    { t:"Agents", i:"Pick: Anthropic's 'Building Effective Agents' lezen vóór je één regel agent-code schrijft, daarna intro tot LangGraph. Mentaal model: een agent is een while-loop met een model dat de vertakkingen kiest. Het denken zit in de prompt, de vertakking is het model dat een tool kiest, het doen is jouw code die de tool draait. De rest is plumbing.",
+      taken:[
+        ["Lees Anthropic's 'Building Effective Agents' vóór je één regel agent-code schrijft","De roadmap noemt dit expliciet als volgorde.",[["Anthropic · Building Effective Agents (gratis)","https://www.anthropic.com/research/building-effective-agents"]]],
+        ["Begrijp de loop perceive → decide → act → observe en hoe hij weet wanneer te stoppen","De kern van elk agentontwerp.",[]],
+        ["Begrijp wat er gebeurt als een tool-call faalt binnen de loop","Zonder dit blijft een agent hangen of crasht hij stil.",[]],
+        ["Schrijf tool-beschrijvingen die het model echt kan gebruiken","Zelfde vaardigheid als in Maand 2, nu binnen een loop.",[]],
+        ["Beheer state","Nodig zodra een agent meerdere stappen na elkaar zet.",[]],
+        ["Maak kennis met LangGraph","Pas ná de from-scratch oefening — dit laat zien wat het framework verbergt.",[["LangGraph · intro (gratis)","https://langchain-ai.github.io/langgraph/"]]]
+      ],
+      build:"Agent from scratch, zonder framework, alleen de model-API. Drie tools, een doel, een loop. De waardevolste oefening van de maand — doe dit vóór je LangGraph aanraakt.",
+      buildPad:"projecten/agent-from-scratch/",
+      trap:"Beslisregel: één model-call als de taak in één prompt past · een vaste workflow als de stappen voorspelbaar zijn · een agent alléén als het aantal stappen echt onvoorspelbaar is en het model dynamisch moet beslissen. Agents zijn trager, duurder, minder voorspelbaar en lastiger te debuggen — zie tabblad Beslisregels."
+    },
+    { t:"Evals", i:"Pick: DeepEval algemeen, Ragas voor RAG. Elke promptwijziging zonder evals is een gok.",
+      taken:[
+        ["Bouw een set van 20–30 representatieve inputs met verwachte outputs of een scoringsrubriek","Basis voor objectieve vergelijking tussen prompt- of modelversies.",[["DeepEval · docs (gratis)","https://docs.confident-ai.com/"],["Ragas · docs voor RAG (gratis)","https://docs.ragas.io/"]]],
+        ["Draai je systeem daartegen bij elke promptwijziging, modelwissel of retrieval-aanpassing","Zonder dit gok je bij elke wijziging.",[]]
+      ],
+      build:"Eval-set van 20–30 inputs op één van je systemen.",
+      buildPad:"projecten/evals/"
+    }
+  ],
+  mijlpaal:[
+    "Uitleggen wat een embedding is en waarom vergelijkbare tekst vergelijkbare vectoren geeft",
+    "Een document zinnig chunken",
+    "Embeddings opslaan en queryen in een vector-DB met metadata-filtering",
+    "Reranking toevoegen",
+    "Een retrieval-fout debuggen in plaats van het model de schuld geven",
+    "Een complete RAG-pipeline bouwen die gegronde, geciteerde antwoorden geeft",
+    "Een agent-loop from scratch implementeren",
+    "Correct kiezen tussen één call, een workflow of een agent",
+    "Een basis-eval draaien"
+  ],
+  mijlpaalNoot:""
+},
+{
+  id:"m4", num:4, kleur:"#15803d",
+  naam:"Shippen, laten zien, betaald worden",
+  periode:"22 okt – 18 nov",
+  doel:"Alles wat je gebouwd hebt echt maken, en het omzetten in een baan of betaald werk.",
+  intro:"Hier stallen de meeste mensen: ze kunnen een demo bouwen maar niets shippen dat echt gebruik overleeft, en ze kunnen hun skills niet omzetten in inkomen. Je hoeft geen infrastructuur-expert te worden — wél een werkende AI-app ergens neerzetten waar echte mensen hem gebruiken, zonder dat hij omvalt of je failliet maakt. Niet overinvesteren: één app, netjes gedeployed, met kostenbeheersing en basis-tracing.",
+  blokken:[
+    { t:"Deployment", i:"Genoeg Docker om je app te packagen (einde van 'works on my machine') — de officiële getting-started guide volstaat. Die container ergens deployen.",
+      taken:[
+        ["Package je app met Docker","Maakt je app overdraagbaar naar elke omgeving.",[["Docker · getting-started guide (gratis)","https://docs.docker.com/get-started/"]]],
+        ["Deploy die container ergens","De stap die van een lokale demo een echt gebruikte app maakt.",[]]
+      ]
+    },
+    { t:"Kostenbeheersing", i:"Zonder dit maakt een populaire app je failliet in plaats van succesvol.",
+      taken:[
+        ["Zet harde spending limits op je API-accounts","Eerste en simpelste bescherming.",[]],
+        ["Cache zodat je niet twee keer voor dezelfde request betaalt","Directe kostenbesparing zonder kwaliteitsverlies.",[]],
+        ["Rate limit zodat één gebruiker je rekening niet kan opblazen","Beschermt tegen misbruik of bugs die veel calls triggeren.",[]],
+        ["Gebruik goedkopere modellen waar die goed genoeg zijn","Zelfde vuistregel als in Maand 2, nu toegepast op productiekosten.",[]]
+      ]
+    },
+    { t:"Observability", i:"Pick: Langfuse. LLM-apps hebben een eigen probleem — het model kan een perfect geslaagde response teruggeven die tegelijk nutteloos of fout is, en normale monitoring ziet dat niet.",
+      taken:[
+        ["Zet Langfuse op bij één project","Tracet elke model-call: prompt, response, tokenkosten, latency.",[["Langfuse · gratis tier","https://langfuse.com/"]]]
+      ]
+    },
+    { t:"Portfolio", i:"Portfolio = drie gedeployde projecten, elk met een README die echt werk doet.",
+      taken:[
+        ["Deploy drie projecten, elk met een README die echt werk doet","De harde eis uit de roadmap: geen drie demo's, drie gedeployde apps.",[]],
+        ["Schrijf per README de vijf secties: welk probleem het oplost, wie het gebruikt, gekozen aanpak en waarom, wat er misging en wat je leerde, hoe je het draait","De move die bijna niemand maakt: een sectie over wat er misging. Een README die zegt 'hier faalde mijn eerste aanpak, dit leerde ik, zo heb ik het opgelost' laat precies het oordeelsvermogen zien waar werkgevers nu op screenen — de switcher's edge, zichtbaar gemaakt.",[]]
+      ]
+    },
+    { t:"Profiel en zichtbaarheid", i:"De beste kansen gaan naar wie zichtbaar was, niet naar wie stil op 500 vacatures solliciteerde.",
+      taken:[
+        ["Schrijf één heldere resume-regel over wat je bouwt, met links naar drie shipped projecten","Je hoeft niet te doen alsof je jaren ervaring hebt — één heldere regel volstaat. Je vorige carrière is een troef: 'voormalig [vakgebied] die nu AI-systemen bouwt' is sterker dan 'junior developer'.",[]],
+        ["Bouw in het openbaar: elk project zichtbaar op het moment dat het af is","Building in public is je pipeline.",[]]
+      ]
+    },
+    { t:"Kies een richting", i:"Kies er één, niet alle drie: AI product engineer, Applied ML, of AI automation.",
+      taken:[
+        ["Kies je richting en ga daar dieper op","Zie tabblad Richtingen voor de volledige uitleg per optie.",[["Zie tabblad Beslisregels","#beslisregels"]]]
+      ]
+    }
+  ],
+  mijlpaal:[
+    "Een gedeployde AI-app met echte kostenbeheersing",
+    "Drie portfolioprojecten, elk met een eerlijke README",
+    "Een heldere one-liner over wat je bouwt",
+    "Een zichtbaar spoor van werk in het openbaar",
+    "Een gekozen richting om dieper op te gaan"
+  ],
+  mijlpaalNoot:"Vier maanden gefocust werk maakt je inzetbaar op juniorniveau of klaar voor freelancewerk. Het maakt je geen senior — dat komt uit jaren dingen shippen onder echte beperkingen, en geen enkele gids comprimeert dat."
+}
+];
+
+const VALKUILEN = [
+  ["Beginnen met theorie en wiskunde","Dit is de eerste van de vier fouten die een carrièreswitch beëindigen — in week 2, niet in maand 3.","Fix: overslaan. Je pikt de concepten op als je ze in een echt project tegenkomt, en dán blijven ze hangen."],
+  ["Tutorials kijken in plaats van bouwen","De meest voorkomende manier om weken te 'leren' zonder daadwerkelijk iets te kunnen bouwen.","Fix: de 30-minutenregel — per uur kijken/lezen minstens 30 minuten bouwen zónder tutorial open. Typ de voorbeelden zelf. Maak ze kapot. De errors zijn het leren."],
+  ["Tools leren in plaats van skills","Een tool-focus veroudert zodra er een framework-update komt; een skill-focus niet.","Fix: leer de skill ónder de tool. Een betrouwbare prompt schrijven verloopt niet als een framework update. Deze roadmap is daarom per skill georganiseerd, niet per tool."],
+  ["Wachten tot je je klaar voelt om in het openbaar te bouwen","Dit gevoel van klaar-zijn komt nooit vanzelf, en het uitstellen kost je de zichtbaarheid die kansen oplevert.","Fix: begin in maand 1. Elk project op GitHub op de dag dat je het af hebt, ook de lelijke. Niemand kijkt zo aandachtig mee dat je vroege werk je in verlegenheid brengt."],
+  ["JSON komt terug gewikkeld in markdown code fences","Bekende faalmodus bij structured-output-extractie (Maand 2): het model zet er soms code fences of een vriendelijke zin voor, waardoor je parser stukloopt.","Fix: strip de code fences vóór het parsen, en wees in je prompt expliciet dat je alléén het JSON-object wilt (zie Prompt 2 in het tabblad Prompts)."],
+  ["Retrieval-fout: vraag en chunk matchen niet in getallenruimte","Eén van de drie meest voorkomende RAG-faalmodi (Maand 3) — de meeste RAG-fouten zijn retrieval-fouten, geen modelfouten.","Fix: herschrijf de query zodat hij dichter bij de taal van je documenten komt."],
+  ["Retrieval-fout: relevante info is verdeeld over twee chunks","Tweede veelvoorkomende RAG-faalmodus: de chunking-grens hakt precies door de relevante informatie heen.","Fix: vergroot de overlap tussen chunks."],
+  ["Retrieval-fout: de juiste chunk bestond maar haalde de top niet","Derde veelvoorkomende RAG-faalmodus: retrieval haalde de juiste chunk wél op, maar niet hoog genoeg.","Fix: haal er meer op en rerank terug naar de beste paar. Kijk altijd eerst wat er opgehaald werd voordat je het model de schuld geeft."]
+];
+
+const BESLISREGELS = [
+  ["Wanneer gebruik je een agent?",
+   ["Eén model-call — als de taak in één prompt past.",
+    "Een vaste workflow — als de stappen voorspelbaar zijn (chaining: output van de één is input van de ander · routing: input classificeren en naar een specialist sturen · parallelisatie: meerdere calls tegelijk, daarna combineren).",
+    "Een agent — alléén als het aantal stappen echt onvoorspelbaar is en het model dynamisch moet beslissen."],
+   "Agents zijn trager, duurder, minder voorspelbaar en lastiger te debuggen. De meeste echte problemen zijn workflows, geen agents — dit onderscheidt iemand met oordeelsvermogen van iemand die het glimmende ding najaagt."],
+  ["Wanneer fine-tune je?",
+   ["Begin met prompting.",
+    "Voeg retrieval toe als het model jouw specifieke data nodig heeft.",
+    "Fine-tune pas als prompting en retrieval de kwaliteit écht niet halen."],
+   "Uit de richting Applied ML (Maand 4): fine-tuning is het laatste redmiddel, niet de eerste stap."]
+];
+
+const RICHTINGEN = [
+  ["AI product engineer","Snelst naar een startup-baan","Je hebt het meeste al uit Maand 1–3. Ga dieper op complete, gepolijste apps en de productkant: hoe de app omgaat met een model dat fout zit, loading states, feedback van gebruikers. Ship twee of drie dingen die mensen echt kunnen proberen.",[]],
+  ["Applied ML","Voor diepere technische rollen","Voorbij API-calls: fine-tuning, wanneer wél/niet, open-source modellen lokaal draaien met Ollama, inference-optimalisatie. Beslisregel: begin met prompting, voeg retrieval toe als het model jouw specifieke data nodig heeft, en fine-tune pas als prompting en retrieval de kwaliteit echt niet halen.",[["Ollama (gratis)","https://ollama.com/"]]],
+  ["AI automation","Snelst geld verdienen bij bedrijven","Echte workflows automatiseren, AI ketenen over e-mail, CRM's, documenten, spreadsheets. n8n voor visueel, LangGraph voor code. Verkoopbare build: een lead-qualification-systeem dat leads binnenhaalt, elke lead met een model onderzoekt en scoort, gepersonaliseerde outreach opstelt en alles logt.",[["n8n (gratis/self-hosted)","https://n8n.io/"],["LangGraph · docs (gratis)","https://langchain-ai.github.io/langgraph/"]]]
+];
+
+const PROMPTS = [
+  ["Python Learning Partner","Maand 1 · vanaf dag 1, elke leersessie, elke error, elk stuk code dat je zelf schrijft",
+   "Laat het uitleggen, jíj typt. Hint eerst, volledige oplossing pas als je twee keer vraagt. Voorkomt Fout 2 uit het tabblad Valkuilen (tutorials kijken in plaats van bouwen).",
+`Your job: act as my patient Python tutor while I learn to code as a career switcher.
+
+Context about me:
+- I am learning Python to become an AI engineer.
+- I am a complete beginner at coding but not at working hard.
+- I learn best by doing, not by being handed answers.
+
+What to do:
+- When I paste an error, explain in plain English what it means and what
+  is likely causing it. Do not just give me the fixed code.
+- Point me toward the fix with a hint first. Only show the full solution
+  if I ask twice.
+- When I share code I wrote, tell me one thing that works and one thing
+  I could improve. Keep it to those two.
+- After I get something working, ask me one short question that checks
+  whether I actually understood it.
+
+Rules:
+- No jargon without a one-line plain-English definition next to it.
+- Assume I want to learn, not just pass. Slightly slower is fine.
+- If I am about to build a bad habit, say so directly and kindly.
+
+Output: conversational, short, one concept at a time.`],
+  ["Structured Data Extraction","Maand 2 · bij structured outputs, vóór en tijdens de bon-/factuurparser",
+   "Werkt al vóórdat je Pydantic/Instructor erbovenop zet. Bekende faalmodus: het model wikkelt de JSON soms in markdown code fences of zet er een vriendelijke zin voor. Fix: strip de code fences vóór het parsen, en wees expliciet dat je alleen het JSON-object wilt — dit patroon doet dat al.",
+`Your job: extract structured data from the text I provide and return it
+as clean JSON.
+
+What to do:
+- Read the input text carefully.
+- Pull out only the fields listed under Output below.
+- If a field is missing from the text, use null. Do not guess or invent.
+- Return only the JSON object. No explanation, no markdown, no preamble.
+
+Rules:
+- Every value must be traceable to something in the input text.
+- Dates in YYYY-MM-DD format. Numbers as numbers, not strings.
+- If the text is ambiguous, prefer null over a confident wrong answer.
+
+Output: a JSON object with these fields:
+{
+  "field_one": string or null,
+  "field_two": number or null,
+  "field_three": list of strings or empty list
+}
+
+Input text:
+[PASTE THE TEXT HERE]`],
+  ["Grounded RAG Answering","Maand 3 · in je RAG-pipeline ('chat met je documenten'-app)",
+   "De instructie 'zeg exact dit als je het niet weet' doet het zware werk: het geeft het model een goedgekeurde manier om onwetendheid toe te geven, in plaats van een antwoord te verzinnen om behulpzaam te lijken. Het artikel noemt dit de prompt om bóven alle andere te bookmarken.",
+`Your job: answer the user's question using only the provided context.
+
+What to do:
+- Read the context chunks below. Each has a source label.
+- Answer the question using only information found in the context.
+- After each claim, cite the source label it came from, like [source: filename, p.3].
+- If the context does not contain the answer, say exactly:
+  "I don't have enough information in the provided documents to answer that."
+
+Rules:
+- Never use knowledge from outside the provided context.
+- Never guess. Never fill gaps with what sounds plausible.
+- If the context partly answers the question, answer that part and say
+  clearly what is missing.
+
+Context:
+[PASTE RETRIEVED CHUNKS WITH SOURCE LABELS HERE]
+
+Question:
+[USER QUESTION HERE]`]
+];
+
+const BRONNEN = [
+  ["Bronartikel — 'You can go from zero to hireable AI engineer in 4 months'","https://x.com/i/article/2074513567701680128"],
+  ["CS50P — Harvard, Introduction to Programming with Python","https://cs50.harvard.edu/python/"],
+  ["GitHub Skills","https://skills.github.com/"],
+  ["MIT Missing Semester","https://missing.csail.mit.edu/"],
+  ["MDN — HTTP overview","https://developer.mozilla.org/en-US/docs/Web/HTTP/Overview"],
+  ["Python requests — docs","https://requests.readthedocs.io/"],
+  ["SQLBolt","https://sqlbolt.com/"],
+  ["Open-Meteo — API-docs","https://open-meteo.com/en/docs"],
+  ["Anthropic — interactive prompt engineering tutorial (GitHub)","https://github.com/anthropics/prompt-eng-interactive-tutorial"],
+  ["Anthropic — prompt engineering docs","https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/overview"],
+  ["OpenAI — prompt engineering guide","https://platform.openai.com/docs/guides/prompt-engineering"],
+  ["Pydantic — docs","https://docs.pydantic.dev/"],
+  ["Instructor — docs","https://python.useinstructor.com/"],
+  ["OpenAI — function calling guide","https://platform.openai.com/docs/guides/function-calling"],
+  ["Anthropic — tool use docs","https://docs.anthropic.com/en/docs/build-with-claude/tool-use"],
+  ["OpenAI Cookbook","https://cookbook.openai.com/"],
+  ["Anthropic — messages docs","https://docs.anthropic.com/en/api/messages"],
+  ["OpenAI — conversation state docs","https://platform.openai.com/docs/guides/conversation-state"],
+  ["Anthropic — streaming docs","https://docs.anthropic.com/en/api/streaming"],
+  ["OpenAI — streaming docs","https://platform.openai.com/docs/guides/streaming-responses"],
+  ["Simon Willison — over LLM-streaming","https://simonwillison.net/tags/llms/"],
+  ["OWASP — Top 10 for LLM Applications","https://owasp.org/www-project-top-10-for-large-language-model-applications/"],
+  ["Tenacity — docs","https://tenacity.readthedocs.io/"],
+  ["LangChain — RecursiveCharacterTextSplitter","https://python.langchain.com/docs/how_to/recursive_text_splitter/"],
+  ["Chroma — docs","https://docs.trychroma.com/"],
+  ["Cohere — reranking-docs","https://docs.cohere.com/docs/rerank-overview"],
+  ["LlamaIndex — docs","https://docs.llamaindex.ai/"],
+  ["Anthropic — Building Effective Agents","https://www.anthropic.com/research/building-effective-agents"],
+  ["LangGraph — docs","https://langchain-ai.github.io/langgraph/"],
+  ["DeepEval — docs","https://docs.confident-ai.com/"],
+  ["Ragas — docs","https://docs.ragas.io/"],
+  ["Docker — getting started","https://docs.docker.com/get-started/"],
+  ["Langfuse","https://langfuse.com/"],
+  ["n8n","https://n8n.io/"],
+  ["Ollama","https://ollama.com/"],
+  ["Stack Overflow — intuïtieve intro tot text embeddings","https://stackoverflow.blog/2023/11/09/an-intuitive-introduction-to-text-embeddings/"],
+  ["OpenAI — embeddings guide","https://platform.openai.com/docs/guides/embeddings"]
+];
+
+/* Week 3 (13-19 aug) is de actieve week; bijgewerkt op 14 aug 2026. */
+const WEEK1 = [
+  "BOUW DE EXPENSE TRACKER. Dit is waar 3, 5 en 6 samenkomen: exceptions voor kapotte input, File I/O voor de JSON, unit tests voor je eigen functies. Er is geen college meer dat je eerst moet doen",
+  "CS50P 9 — Et Cetera: venv en pip. Zonder venv installeer je in Maand 2 geen enkele SDK",
+  "GitHub Skills — het laatste openstaande week-2-restje",
+  "Branching en merging in de praktijk: deze repo draait sinds 16 aug op een aparte branch",
+  "CS50P 7 (regex) en 8 (OOP) ertussendoor — niet op het kritieke pad"
+];
+
+const CIJFERS = {
+  bron1:"Glassdoor, juni 2026",
+  salaris:[
+    {label:"Mid-level AI engineer (VS)",p25:115000,gem:143500,p75:181000,top:223000},
+    {label:"Senior AI engineer (VS)",p25:221000,gem:285000,p75:375000,top:null}
+  ],
+  recruiterNoot:"Recruiters die mensen in echte productie-AI plaatsen rapporteren mid-level basissalarissen tussen $155.000 en $200.000, op basis van getekende offers.",
+  bron2:"PwC 2026 Global AI Jobs Barometer, gebaseerd op meer dan 1 miljard vacatures",
+  markt:[
+    ["Groei in vacatures die AI-skills vragen","69% (t.o.v. 9% voor de hele markt — 8x sneller)"],
+    ["Loonpremie voor AI-skills","62% (op van 57%)"],
+    ["Diploma-filter bij AI-augmented banen","van 66% naar 59% van de vacatures vraagt nog een diploma"],
+    ["Diploma-filter bij AI-geautomatiseerd werk","van 53% naar 44%"],
+    ["Groei entry-level rollen met hoge AI-blootstelling sinds 2019","+35% (tegenover -10% voor overige entry-level rollen)"]
+  ]
+};
+
+/* Tijdlijnrekenaar-ijkpunten: DASHBOARD-TOEVOEGING, afgeleid van de cijfers in de bron
+   (tempo 15-25u/w gepland, artikel rekent met 15-20u/w voor het 4-maandenpad = 16 weken).
+   Ankerpunt: 16 weken x 17,5u/w (midden van 15-20) = 280 totaal-uren. Tussen de ijkpunten
+   wordt lineair geïnterpoleerd — dit is geen letterlijk cijfer uit de bron. */
+const TIJDLIJN_TOTAAL_UREN = 280;
+const TIJDLIJN_ANCHORS = [15,20,25];
+
+/* ======================= STATE ======================= */
+const LS_KEY = "aiengineer_roadmap_v1";
+
+/* Snapshot van je echte repo op 6 aug 2026 (git log): de CS50P-opdrachten die al als
+   bestand in maand-1-fundament/cs50/ staan. DASHBOARD-TOEVOEGING — vult de eerste keer
+   dat je dit dashboard opent alvast in wat je al hebt gedaan, in plaats van bij 0% te
+   beginnen. Werkt alleen bij het allereerste bezoek; daarna is jouw afvinkgedrag leidend. */
+const SEED_SNAPSHOT_DATUM = "16 augustus 2026";
+const SEED_DONE = [
+  taskKeyRaw("m1",0,0), // CS50P 0 Functions,Variables — einstein, faces, indoor, playback, tip
+  taskKeyRaw("m1",0,1), // CS50P 1 Conditionals — bank, deep, extensions, interpreter, meal
+  taskKeyRaw("m1",0,2), // CS50P 2 Loops — camel, coke, nutrition, plates, twttr
+  taskKeyRaw("m1",0,3), // CS50P 3 Exceptions — fuel, grocery, outdated, taqueria
+  taskKeyRaw("m1",0,4), // CS50P 4 Libraries — adieu, bitcoin, emojize, figlet, game, professor
+  taskKeyRaw("m1",0,5), // CS50P 5 Unit Tests — test_bank, test_fuel, test_plates, test_twttr
+  taskKeyRaw("m1",0,6), // CS50P 6 File I/O — lines, pizza, scourgify, shirt
+  taskKeyRaw("m1",1,0), // Git kernlus — blijkt uit de commit-history van deze repo
+  taskKeyRaw("m1",1,2), // .gitignore + secrets erbuiten — .gitignore + bitcoin.py via COINCAP_API_KEY
+  taskKeyRaw("m1",1,3), // basis-README — README.md in de root en per maandmap
+  taskKeyRaw("m1",2,3)  // environment variable gezet — COINCAP_API_KEY voor bitcoin.py
+];
+function taskKeyRaw(m,b,i){ return m+"|"+b+"|"+i; }
+
+let STATE = {done:{}, saved:null};
+let SEEDED = false;
+try{
+  const raw = localStorage.getItem(LS_KEY);
+  if(raw){
+    STATE = Object.assign({done:{},saved:null}, JSON.parse(raw));
+  } else {
+    const seedDone = {};
+    SEED_DONE.forEach(id=>{ seedDone[id]=true; });
+    STATE = {done:seedDone, saved:null};
+    SEEDED = true;
+  }
+}catch(e){}
+
+function saveState(){
+  STATE.saved = new Date().toISOString();
+  try{ localStorage.setItem(LS_KEY, JSON.stringify(STATE)); }catch(e){}
+  renderFooter();
+}
+
+function taskKey(m,b,i){ return m+"|"+b+"|"+i; }
+function buildKey(m,b){ return m+"|build|"+b; }
+function msKey(m,i){ return m+"|ms|"+i; }
+
+/* ======================= AFGELEIDE TELLINGEN ======================= */
+const ALL_STEPS = [];   // {id, mod, blokIdx, taakIdx, title}
+const ALL_BUILDS = [];  // {id, mod, blokIdx, title}
+const ALL_MS = [];      // {id, mod, msIdx, title}
+
+MODS.forEach(mod=>{
+  mod.blokken.forEach((blok,bi)=>{
+    blok.taken.forEach((tk,ti)=>{
+      ALL_STEPS.push({id:taskKey(mod.id,bi,ti), mod:mod.id, blokIdx:bi, taakIdx:ti, title:tk[0]});
+    });
+    if(blok.build){
+      ALL_BUILDS.push({id:buildKey(mod.id,bi), mod:mod.id, blokIdx:bi, title:blok.build, pad:blok.buildPad||null});
+    }
+  });
+  mod.mijlpaal.forEach((m,mi)=>{
+    ALL_MS.push({id:msKey(mod.id,mi), mod:mod.id, msIdx:mi, title:m});
+  });
+});
+
+function isDone(id){ return !!STATE.done[id]; }
+function countDone(list){ return list.filter(x=>isDone(x.id)).length; }
+
+function modProgress(modId){
+  const steps = ALL_STEPS.filter(s=>s.mod===modId);
+  const builds = ALL_BUILDS.filter(s=>s.mod===modId);
+  const ms = ALL_MS.filter(s=>s.mod===modId);
+  const all = steps.concat(builds, ms);
+  if(all.length===0) return 0;
+  return Math.round(100*countDone(all)/all.length);
+}
+
+function currentModule(){
+  for(const mod of MODS){ if(modProgress(mod.id) < 100) return mod; }
+  return MODS[MODS.length-1];
+}
+
+function nextSixSteps(){
+  const out = [];
+  for(const mod of MODS){
+    for(let bi=0; bi<mod.blokken.length; bi++){
+      const blok = mod.blokken[bi];
+      for(let ti=0; ti<blok.taken.length; ti++){
+        const id = taskKey(mod.id,bi,ti);
+        if(!isDone(id)){
+          out.push({id, mod, title:blok.taken[ti][0]});
+          if(out.length>=6) return out;
+        }
+      }
+    }
+  }
+  return out;
+}
+
+/* ======================= HELPERS: HTML ======================= */
+function esc(s){
+  return String(s).replace(/[&<>"']/g, c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+}
+function linkPill(label,url){
+  const paid = /betaald|paid/i.test(label);
+  const internal = url.startsWith("#");
+  if(internal){
+    return `<a class="pill" href="${esc(url)}" data-innerlink="${esc(url.slice(1))}">${esc(label)}</a>`;
+  }
+  return `<a class="pill${paid?' paid':''}" href="${esc(url)}" target="_blank" rel="noopener">${esc(label)}</a>`;
+}
+
+/* ======================= RENDER: OVERZICHT ======================= */
+function renderOverzicht(){
+  const el = document.getElementById("tab-overzicht");
+  const cur = currentModule();
+  const doneSteps = countDone(ALL_STEPS), totSteps = ALL_STEPS.length;
+  const doneMs = countDone(ALL_MS), totMs = ALL_MS.length;
+  const doneBuilds = countDone(ALL_BUILDS), totBuilds = ALL_BUILDS.length;
+  const totalAll = totSteps+totMs+totBuilds;
+  const doneAll = doneSteps+doneMs+doneBuilds;
+  const overallPct = totalAll ? Math.round(100*doneAll/totalAll) : 0;
+
+  const R = 42, C = 2*Math.PI*R;
+  const dash = (overallPct/100)*C;
+
+  const bars = MODS.map(m=>{
+    const pct = modProgress(m.id);
+    return `<div class="bar-row">
+      <span class="name" style="color:${m.kleur}">${esc(m.naam)}</span>
+      <span class="bar-track"><span class="bar-fill" style="width:${pct}%;background:${m.kleur}"></span></span>
+      <span class="pct">${pct}%</span>
+    </div>`;
+  }).join("");
+
+  const next6 = nextSixSteps();
+  const nextHtml = next6.length ? next6.map(s=>`
+    <button class="step-item" type="button" data-target="${esc(s.id)}">
+      <span class="dot" style="background:${s.mod.kleur}"></span>
+      <span class="txt"><b>${esc(s.title)}</b><span>${esc(s.mod.naam)}</span></span>
+    </button>`).join("") : `<div class="step-item"><span class="txt"><b>Alles afgevinkt.</b><span>Geen openstaande stappen meer in de roadmap.</span></span></div>`;
+
+  const weekHtml = WEEK1.map(w=>`<li>${esc(w)}</li>`).join("");
+
+  const seedBanner = (SEEDED && doneAll>0) ? `
+    <div class="box build" style="margin-bottom:16px">
+      <span class="box-lbl">Automatisch ingevuld</span>
+      De ${SEED_DONE.length} onderdelen die aantoonbaar in de repo staan zijn alvast aangevinkt: CS50P 0 t/m 6 als eigen bestanden, plus de Git- en terminalpunten die uit de commit-history en uit <code>bitcoin.py</code> blijken. Alleen wat te controleren is in de repo staat hier voorgevinkt — de rest vink je zelf af.
+    </div>` : "";
+
+  el.innerHTML = `
+    ${seedBanner}
+    <div class="grid g4">
+      <button class="stat" type="button" data-go="road">
+        <span class="lbl">Totale voortgang <span class="arrow">→</span></span>
+        <span class="val">${doneAll} <small>/ ${totalAll}</small></span>
+        <span class="go">Klik → tabblad Roadmap, alle modules open</span>
+      </button>
+      <button class="stat" type="button" data-go="module">
+        <span class="lbl">Huidige module <span class="arrow">→</span></span>
+        <span class="val" style="color:${cur.kleur}">M${cur.num} <small>${esc(cur.naam)}</small></span>
+        <span class="go">Klik → tabblad Roadmap, alleen deze module open</span>
+      </button>
+      <button class="stat" type="button" data-go="mijlpalen">
+        <span class="lbl">Mijlpalen behaald <span class="arrow">→</span></span>
+        <span class="val">${doneMs} <small>/ ${totMs}</small></span>
+        <span class="go">Klik → tabblad Mijlpalen</span>
+      </button>
+      <button class="stat" type="button" data-go="builds">
+        <span class="lbl">Bouwopdrachten af <span class="arrow">→</span></span>
+        <span class="val">${doneBuilds} <small>/ ${totBuilds}</small></span>
+        <span class="go">Klik → tabblad Bouwopdrachten</span>
+      </button>
+    </div>
+
+    <div class="sect-title"><h2>Voortgang</h2></div>
+    <div class="card ring-row">
+      <svg width="104" height="104" viewBox="0 0 104 104" role="img" aria-label="${overallPct}% klaar">
+        <circle cx="52" cy="52" r="${R}" fill="none" stroke="var(--accent-soft)" stroke-width="10"/>
+        <circle cx="52" cy="52" r="${R}" fill="none" stroke="var(--accent)" stroke-width="10"
+          stroke-linecap="round" stroke-dasharray="${dash} ${C}" transform="rotate(-90 52 52)"/>
+        <text x="52" y="58" text-anchor="middle" font-size="20" font-weight="800" fill="var(--ink)">${overallPct}%</text>
+      </svg>
+      <div style="flex:1;min-width:220px">
+        <div class="ring-num"><b>${doneAll} van de ${totalAll}</b> afvinkbare punten afgerond (stappen, bouwopdrachten en mijlpalen samen)</div>
+        <div class="bars">${bars}</div>
+      </div>
+    </div>
+
+    <div class="grid g2" style="margin-top:22px">
+      <div>
+        <div class="sect-title"><h2>Je volgende 6 stappen</h2></div>
+        <div class="card step-list">${nextHtml}</div>
+      </div>
+      <div>
+        <div class="sect-title"><h2>Deze week beginnen</h2><span class="n">week van 13–19 aug · Maand 1</span></div>
+        <div class="card"><ul class="week-list">${weekHtml}</ul></div>
+      </div>
+    </div>
+  `;
+}
+
+/* ======================= RENDER: VALKUILEN ======================= */
+function renderValkuilen(){
+  const el = document.getElementById("tab-valkuilen");
+  el.innerHTML = `
+    <div class="sect-title"><h2>Valkuilen</h2><span class="n">${VALKUILEN.length} fouten uit de bron, elk met oplossing</span></div>
+    ${VALKUILEN.map(v=>`
+      <div class="valk">
+        <h3>${esc(v[0])}</h3>
+        <div class="probleem">${esc(v[1])}</div>
+        <div class="oplossing"><b>Oplossing —</b> ${esc(v[2])}</div>
+      </div>
+    `).join("")}
+  `;
+}
+
+/* ======================= RENDER: ROADMAP ======================= */
+function renderRoadmap(openIds){
+  const el = document.getElementById("tab-roadmap");
+  el.innerHTML = `
+    <div class="sect-title"><h2>Roadmap</h2><span class="n">4 modules · ${ALL_STEPS.length} stappen · ${ALL_BUILDS.length} bouwopdrachten · ${ALL_MS.length} mijlpaalpunten</span></div>
+    <div id="modsHost"></div>
+  `;
+  const host = document.getElementById("modsHost");
+  MODS.forEach(mod=>{
+    const pct = modProgress(mod.id);
+    const wrap = document.createElement("div");
+    wrap.className = "mod";
+    wrap.dataset.mod = mod.id;
+    if(openIds && openIds.has(mod.id)) wrap.classList.add("open");
+
+    const blokkenHtml = mod.blokken.map((blok,bi)=>{
+      const takenHtml = blok.taken.map((tk,ti)=>{
+        const id = taskKey(mod.id,bi,ti);
+        const done = isDone(id);
+        const links = tk[2] && tk[2].length ? `<div class="pills">${tk[2].map(l=>linkPill(l[0],l[1])).join("")}</div>` : "";
+        return `
+          <div class="taak${done?' done':''}" data-id="${esc(id)}">
+            <input type="checkbox" id="rm_${esc(id)}" data-id="${esc(id)}" ${done?'checked':''}/>
+            <div class="body">
+              <label for="rm_${esc(id)}">${esc(tk[0])}</label>
+              <div class="expl">${esc(tk[1])}</div>
+              ${links}
+            </div>
+          </div>`;
+      }).join("");
+      const buildHtml = blok.build ? `
+        <div class="box build">
+          <span class="box-lbl">Bouwopdracht</span>
+          ${blok.buildPad ? `<code class="pad">${esc(blok.buildPad)}</code>` : ""}
+          ${esc(blok.build)}
+          ${blok.buildLinks && blok.buildLinks.length ? `<div class="pills">${blok.buildLinks.map(l=>linkPill(l[0],l[1])).join("")}</div>` : ""}
+        </div>` : "";
+      const trapHtml = blok.trap ? `
+        <div class="box trap">
+          <span class="box-lbl">Valkuil</span>
+          ${esc(blok.trap)}
+        </div>` : "";
+      return `
+        <div class="blok">
+          <h4>${esc(blok.t)}</h4>
+          <div class="bi">${esc(blok.i)}</div>
+          ${takenHtml}
+          ${buildHtml}
+          ${trapHtml}
+        </div>`;
+    }).join("");
+
+    const msHtml = mod.mijlpaal.map((m,mi)=>{
+      const id = msKey(mod.id,mi);
+      const done = isDone(id);
+      return `
+        <div class="taak${done?' done':''}" data-id="${esc(id)}">
+          <input type="checkbox" id="rm_${esc(id)}" data-id="${esc(id)}" ${done?'checked':''}/>
+          <div class="body"><label for="rm_${esc(id)}">${esc(m)}</label></div>
+        </div>`;
+    }).join("");
+
+    wrap.innerHTML = `
+      <button class="mod-head" type="button" data-toggle="${esc(mod.id)}">
+        <span class="mod-num" style="background:${mod.kleur}">M${mod.num}</span>
+        <span class="ttl"><h3>${esc(mod.naam)}</h3><div class="doel">${esc(mod.periode)} — ${esc(mod.doel)}</div></span>
+        <span class="pct">${pct}%</span>
+        <span class="chev">&#9656;</span>
+      </button>
+      <div class="mod-body">
+        <div class="mod-intro">${esc(mod.intro)}</div>
+        ${blokkenHtml}
+        <div class="milestone">
+          <div class="ms-lbl">Milestone — af als je dit kunt</div>
+          ${msHtml}
+          ${mod.mijlpaalNoot ? `<div class="noot">${esc(mod.mijlpaalNoot)}</div>` : ""}
+        </div>
+      </div>
+    `;
+    host.appendChild(wrap);
+  });
+
+  host.querySelectorAll("[data-toggle]").forEach(btn=>{
+    btn.addEventListener("click", ()=>{
+      btn.closest(".mod").classList.toggle("open");
+    });
+  });
+}
+
+/* ======================= RENDER: MIJLPALEN ======================= */
+function renderMijlpalen(){
+  const el = document.getElementById("tab-mijlpalen");
+  el.innerHTML = `
+    <div class="sect-title"><h2>Mijlpalen</h2><span class="n">${ALL_MS.length} punten over 4 modules</span></div>
+    ${MODS.map(mod=>{
+      const items = mod.mijlpaal.map((m,mi)=>{
+        const id = msKey(mod.id,mi);
+        const done = isDone(id);
+        return `
+          <div class="taak${done?' done':''}" data-id="${esc(id)}">
+            <input type="checkbox" id="ms_${esc(id)}" data-id="${esc(id)}" ${done?'checked':''}/>
+            <div class="body"><label for="ms_${esc(id)}">${esc(m)}</label></div>
+          </div>`;
+      }).join("");
+      const doneCount = countDone(ALL_MS.filter(m=>m.mod===mod.id));
+      const pct = mod.mijlpaal.length ? Math.round(100*doneCount/mod.mijlpaal.length) : 0;
+      return `
+        <div class="card" style="margin-bottom:14px">
+          <div class="bar-row" style="grid-template-columns:1fr 46px;margin-bottom:10px">
+            <span class="name" style="color:${mod.kleur}">M${mod.num} — ${esc(mod.naam)}</span>
+            <span class="pct">${pct}%</span>
+          </div>
+          ${items}
+          ${mod.mijlpaalNoot ? `<div class="expl" style="margin-top:10px;font-style:italic">${esc(mod.mijlpaalNoot)}</div>` : ""}
+        </div>`;
+    }).join("")}
+  `;
+}
+
+/* ======================= RENDER: BOUWOPDRACHTEN ======================= */
+function renderBouwopdrachten(){
+  const el = document.getElementById("tab-builds");
+  el.innerHTML = `
+    <div class="sect-title"><h2>Bouwopdrachten</h2><span class="n">${ALL_BUILDS.length} bouwopdrachten uit de roadmap</span></div>
+    ${MODS.map(mod=>{
+      const items = ALL_BUILDS.filter(b=>b.mod===mod.id);
+      if(!items.length) return "";
+      return `
+        <div class="card" style="margin-bottom:14px">
+          <div class="name" style="color:${mod.kleur};margin-bottom:10px">M${mod.num} — ${esc(mod.naam)}</div>
+          ${items.map(b=>{
+            const done = isDone(b.id);
+            return `
+              <div class="taak${done?' done':''}" data-id="${esc(b.id)}">
+                <input type="checkbox" id="bd_${esc(b.id)}" data-id="${esc(b.id)}" ${done?'checked':''}/>
+                <div class="body">
+                  <label for="bd_${esc(b.id)}">${b.pad?`<code class="pad">${esc(b.pad)}</code>`:""}${esc(b.title)}</label>
+                </div>
+              </div>`;
+          }).join("")}
+        </div>`;
+    }).join("")}
+    <div class="sect-title"><h2>Portfolioprojecten</h2><span class="n">Maand 4</span></div>
+    <div class="card">
+      <div class="expl">De bron beschrijft voor Maand 4 geen aparte checklist met bouwopdrachten zoals bij Maand 1–3, alleen de milestone: <b>drie gedeployde projecten</b>, elk met een README van vijf secties (probleem · doelgroep · gekozen aanpak en waarom · wat er misging en wat je leerde · hoe je het draait). Zie tabblad Mijlpalen voor de volledige M4-milestone.</div>
+    </div>
+  `;
+}
+
+/* ======================= RENDER: PROMPTS ======================= */
+function renderPrompts(){
+  const el = document.getElementById("tab-prompts");
+  el.innerHTML = `
+    <div class="sect-title"><h2>Prompts</h2><span class="n">${PROMPTS.length} volledige, kopieerbare prompts uit de bron</span></div>
+    ${PROMPTS.map((p,idx)=>`
+      <div class="prompt-card">
+        <div class="prompt-head">
+          <div><h3>${esc(p[0])}</h3><div class="when">${esc(p[1])}</div></div>
+          <button class="copy-btn" type="button" data-copy="${idx}">Kopieer prompt</button>
+        </div>
+        <div class="prompt-why">${esc(p[2])}</div>
+        <div class="prompt-body"><pre id="promptText${idx}">${esc(p[3])}</pre></div>
+      </div>
+    `).join("")}
+  `;
+  el.querySelectorAll("[data-copy]").forEach(btn=>{
+    btn.addEventListener("click", ()=>{
+      const idx = btn.getAttribute("data-copy");
+      const text = PROMPTS[idx][3];
+      const done = ()=>{
+        const orig = "Kopieer prompt";
+        btn.textContent = "Gekopieerd ✓";
+        btn.classList.add("done");
+        setTimeout(()=>{ btn.textContent = orig; btn.classList.remove("done"); }, 1800);
+      };
+      if(navigator.clipboard && navigator.clipboard.writeText){
+        navigator.clipboard.writeText(text).then(done).catch(done);
+      }else{ done(); }
+    });
+  });
+}
+
+/* ======================= RENDER: BESLISREGELS ======================= */
+function renderBeslisregels(){
+  const el = document.getElementById("tab-beslisregels");
+  el.innerHTML = `
+    <div class="sect-title"><h2>Beslisregels</h2><span class="n">${BESLISREGELS.length} keuzeschema's uit de bron</span></div>
+    ${BESLISREGELS.map(r=>`
+      <div class="regel">
+        <h3>${esc(r[0])}</h3>
+        <ol>${r[1].map(o=>`<li>${esc(o)}</li>`).join("")}</ol>
+        ${r[2] ? `<div class="ctx">${esc(r[2])}</div>` : ""}
+      </div>
+    `).join("")}
+    <div class="sect-title"><h2>Richtingen</h2><span class="n">Maand 4 — kies er één, niet alle drie</span></div>
+    <div class="grid g2">
+      ${RICHTINGEN.map(r=>`
+        <div class="richting">
+          <h3>${esc(r[0])}</h3>
+          <div class="voor">${esc(r[1])}</div>
+          <p>${esc(r[2])}</p>
+          ${r[3] && r[3].length ? `<div class="pills">${r[3].map(l=>linkPill(l[0],l[1])).join("")}</div>` : ""}
+        </div>
+      `).join("")}
+    </div>
+  `;
+}
+
+/* ======================= RENDER: CIJFERS ======================= */
+function renderCijfers(){
+  const el = document.getElementById("tab-cijfers");
+  const W = 560, H = 230, PAD_L = 190, PAD_R = 20, PAD_T = 16, PAD_B = 16;
+  const maxVal = 400000;
+  const rows = [];
+  CIJFERS.salaris.forEach(s=>{
+    rows.push({label:s.label+" — 25e percentiel", val:s.p25, shade:"#c7d2fe"});
+    rows.push({label:s.label+" — gemiddeld", val:s.gem, shade:"#6366f1"});
+    rows.push({label:s.label+" — 75e percentiel"+(s.top?"":""), val:s.p75, shade:"#4338ca"});
+    if(s.top) rows.push({label:s.label+" — top", val:s.top, shade:"#312e81"});
+  });
+  const rowH = (H-PAD_T-PAD_B)/rows.length;
+  const barsSvg = rows.map((r,i)=>{
+    const y = PAD_T + i*rowH + rowH*0.2;
+    const bh = rowH*0.6;
+    const bw = (W-PAD_L-PAD_R) * (r.val/maxVal);
+    return `
+      <text x="${PAD_L-10}" y="${y+bh/2+4}" text-anchor="end" font-size="11" fill="var(--ink-2)">${esc(r.label)}</text>
+      <rect x="${PAD_L}" y="${y}" width="${bw}" height="${bh}" rx="4" fill="${r.shade}"/>
+      <text x="${PAD_L+bw+8}" y="${y+bh/2+4}" font-size="11" font-weight="700" fill="var(--ink)">$${r.val.toLocaleString('nl-NL')}</text>
+    `;
+  }).join("");
+
+  el.innerHTML = `
+    <div class="sect-title"><h2>Cijfers</h2><span class="n">Bron: ${esc(CIJFERS.bron1)}</span></div>
+    <div class="card chart-card overflow-x">
+      <svg width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" role="img" aria-label="Salarisranges AI engineer">
+        ${barsSvg}
+      </svg>
+      <div class="cijfer-src">${esc(CIJFERS.recruiterNoot)}</div>
+    </div>
+
+    <div class="sect-title"><h2>Marktcontext</h2><span class="n">Bron: ${esc(CIJFERS.bron2)}</span></div>
+    <div class="stattiles">
+      ${CIJFERS.markt.map(m=>`
+        <div class="stattile">
+          <div class="v">${esc(m[1])}</div>
+          <div class="l">${esc(m[0])}</div>
+        </div>
+      `).join("")}
+    </div>
+  `;
+}
+
+/* ======================= RENDER: EERLIJK ======================= */
+function renderEerlijk(){
+  const el = document.getElementById("tab-eerlijk");
+  el.innerHTML = `
+    <div class="sect-title"><h2>Het eerlijke deel</h2></div>
+    <div class="card">
+      <p>Vier maanden gefocust werk maakt je inzetbaar op juniorniveau of klaar voor freelancewerk. Het maakt je geen senior — dat komt uit jaren dingen shippen onder echte beperkingen, en geen enkele gids comprimeert dat.</p>
+      <p>Wat vier maanden je wél koopt: het vermogen AI-systemen te bouwen, shippen en deployen die echte problemen oplossen. Dat is een oprecht waardevolle en oprecht aanneembare plek.</p>
+      <p>Wat mensen kapotmaakt is niet een traag tempo. Het is stoppen. Consistentie verslaat intensiteit, elke keer.</p>
+      <p style="margin-bottom:0">En alles rust op één gedrag: <b>bouwen, niet alleen kijken.</b> Elke maand heeft een project. Doe de projecten.</p>
+    </div>
+
+    <div class="sect-title"><h2>Tijdlijnrekenaar</h2><span class="n">dashboard-toevoeging, afgeleid van de cijfers hieronder</span></div>
+    <div class="calc">
+      <div class="calc-row">
+        <label for="urenInput"><b>Jouw uren per week:</b></label>
+        <input type="number" id="urenInput" min="1" max="80" value="20"/>
+        <span style="color:var(--ink-2);font-size:12.5px">(gepland tempo in je roadmap: 15–25 u/w)</span>
+      </div>
+      <div class="calc-out" id="calcOut"></div>
+      <table class="anchor-table">
+        <thead><tr><th>Tempo</th><th>Duur</th><th>Bron</th></tr></thead>
+        <tbody>
+          <tr><td>15 u/w</td><td>${(TIJDLIJN_TOTAAL_UREN/15).toFixed(1)} weken (~${(TIJDLIJN_TOTAAL_UREN/15/4.33).toFixed(1)} maanden)</td><td>ondergrens artikel-tempo (15–20u/w)</td></tr>
+          <tr><td>20 u/w</td><td>${(TIJDLIJN_TOTAAL_UREN/20).toFixed(1)} weken (~${(TIJDLIJN_TOTAAL_UREN/20/4.33).toFixed(1)} maanden)</td><td>bovengrens artikel-tempo — het 4-maandenpad uit de bron</td></tr>
+          <tr><td>25 u/w</td><td>${(TIJDLIJN_TOTAAL_UREN/25).toFixed(1)} weken (~${(TIJDLIJN_TOTAAL_UREN/25/4.33).toFixed(1)} maanden)</td><td>bovengrens jouw geplande tempo (15–25u/w)</td></tr>
+        </tbody>
+      </table>
+      <div class="calc-note">Ankerpunt: het artikel rekent met 15–20 u/w voor het 4-maandenpad (16 weken); jouw roadmap plant 15–25 u/w over diezelfde 16 weken. Deze rekenmachine interpoleert lineair tussen die ijkpunten (16 weken × 17,5 u/w ≈ 280 totaal-uren) — dit is een afgeleide berekening van het dashboard, geen letterlijk cijfer uit de bron.</div>
+    </div>
+  `;
+  const input = document.getElementById("urenInput");
+  const out = document.getElementById("calcOut");
+  function updateCalc(){
+    let uren = parseFloat(input.value);
+    if(!uren || uren<=0) uren = 1;
+    const weken = TIJDLIJN_TOTAAL_UREN/uren;
+    const maanden = weken/4.33;
+    out.innerHTML = `Bij <b>${uren} uur per week</b> duurt deze roadmap ongeveer <b>${weken.toFixed(1)} weken</b> — zo'n <b>${maanden.toFixed(1)} maanden</b>.`;
+  }
+  input.addEventListener("input", updateCalc);
+  updateCalc();
+}
+
+/* ======================= FOOTER ======================= */
+function renderFooter(){
+  const el = document.getElementById("laatstGewijzigd");
+  if(!STATE.saved){
+    el.textContent = SEEDED
+      ? "Voortgang automatisch ingevuld op basis van je repo (t/m " + SEED_SNAPSHOT_DATUM + "). Nog geen handmatige wijzigingen."
+      : "Nog niets afgevinkt.";
+    return;
+  }
+  const d = new Date(STATE.saved);
+  const fmt = d.toLocaleString('nl-NL', {day:'2-digit',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit'});
+  el.textContent = "Laatst gewijzigd: " + fmt;
+}
+
+/* ======================= RENDER ALL ======================= */
+function renderAll(openIds){
+  renderOverzicht();
+  renderValkuilen();
+  renderRoadmap(openIds);
+  renderMijlpalen();
+  renderBouwopdrachten();
+  renderPrompts();
+  renderBeslisregels();
+  renderCijfers();
+  renderEerlijk();
+  renderFooter();
+}
+
+/* ======================= TABS ======================= */
+const TAB_IDS = ["overzicht","valkuilen","roadmap","mijlpalen","builds","prompts","beslisregels","cijfers","eerlijk"];
+function showTab(name){
+  document.querySelectorAll(".nav button").forEach(b=>{
+    const active = b.getAttribute("data-tab")===name;
+    b.setAttribute("aria-selected", active ? "true":"false");
+  });
+  TAB_IDS.forEach(t=>{
+    document.getElementById("tab-"+t).classList.toggle("active", t===name);
+  });
+}
+document.querySelectorAll(".nav button").forEach(b=>{
+  b.addEventListener("click", ()=>showTab(b.getAttribute("data-tab")));
+});
+
+/* ======================= GEDELEGEERDE CHECKBOX-HANDLER ======================= */
+document.addEventListener("change", (e)=>{
+  const t = e.target;
+  if(t && t.matches('input[type="checkbox"][data-id]')){
+    const id = t.getAttribute("data-id");
+    STATE.done[id] = t.checked;
+    SEEDED = false;
+    saveState();
+    // synchroniseer dezelfde data-id in alle weergaven
+    document.querySelectorAll(`input[type="checkbox"][data-id="${CSS.escape(id)}"]`).forEach(cb=>{
+      cb.checked = t.checked;
+      cb.closest(".taak").classList.toggle("done", t.checked);
+    });
+    // herbereken widgets die tellingen tonen (roadmap-chevrons open laten staan)
+    const openIds = new Set();
+    document.querySelectorAll("#tab-roadmap .mod.open").forEach(m=>openIds.add(m.dataset.mod));
+    renderOverzicht();
+    renderRoadmap(openIds);
+    renderMijlpalen();
+    renderBouwopdrachten();
+  }
+});
+
+/* ======================= KLIKBARE KERNCIJFERS ======================= */
+document.addEventListener("click",(e)=>{
+  const inner = e.target.closest("[data-innerlink]");
+  if(inner){
+    e.preventDefault();
+    showTab(inner.getAttribute("data-innerlink"));
+    return;
+  }
+  const stat = e.target.closest("[data-go]");
+  if(stat){
+    const go = stat.getAttribute("data-go");
+    if(go==="road"){
+      showTab("roadmap");
+      const all = new Set(MODS.map(m=>m.id));
+      const openIds = all;
+      document.querySelectorAll("#tab-roadmap .mod").forEach(m=>m.classList.add("open"));
+    } else if(go==="module"){
+      showTab("roadmap");
+      const cur = currentModule();
+      document.querySelectorAll("#tab-roadmap .mod").forEach(m=>{
+        m.classList.toggle("open", m.dataset.mod===cur.id);
+      });
+      const target = document.querySelector(`#tab-roadmap .mod[data-mod="${cur.id}"]`);
+      if(target) setTimeout(()=>target.scrollIntoView({block:"start"}), 50);
+    } else if(go==="mijlpalen"){
+      showTab("mijlpalen");
+    } else if(go==="builds"){
+      showTab("builds");
+    }
+    return;
+  }
+  const step = e.target.closest(".step-item[data-target]");
+  if(step){
+    jumpToStep(step.getAttribute("data-target"));
+  }
+});
+
+function jumpToStep(id){
+  showTab("roadmap");
+  document.querySelectorAll("#tab-roadmap .mod").forEach(m=>m.classList.remove("open"));
+  const modId = id.split("|")[0];
+  const modEl = document.querySelector(`#tab-roadmap .mod[data-mod="${modId}"]`);
+  if(modEl) modEl.classList.add("open");
+  setTimeout(()=>{
+    const target = document.querySelector(`#tab-roadmap .taak[data-id="${CSS.escape(id)}"]`);
+    if(target){
+      target.scrollIntoView({block:"center"});
+      target.classList.remove("flash");
+      void target.offsetWidth;
+      target.classList.add("flash");
+      setTimeout(()=>target.classList.remove("flash"), 2400);
+    } else if(modEl){
+      modEl.scrollIntoView({block:"start"});
+    }
+  }, 160);
+}
+
+/* ======================= RESET ======================= */
+document.getElementById("resetBtn").addEventListener("click", ()=>{
+  if(confirm("Voortgang resetten? Dit wist al je handmatige vinkjes en zet de teller terug naar de automatisch ingevulde CS50P-opdrachten uit je repo.")){
+    const seedDone = {};
+    SEED_DONE.forEach(id=>{ seedDone[id]=true; });
+    STATE = {done:seedDone, saved:null};
+    SEEDED = true;
+    try{ localStorage.removeItem(LS_KEY); }catch(e){}
+    const openIds = new Set();
+    renderAll(openIds);
+  }
+});
+
+/* ======================= INIT ======================= */
+renderAll(new Set([currentModule().id]));
+showTab("overzicht");
+</script>
+</body>
+</html>
