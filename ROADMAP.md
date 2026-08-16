@@ -74,10 +74,128 @@ Niets uit je hoofd leren. Goed genoeg begrijpen om het snel op te zoeken, en erm
 
 ### Weekindeling
 
+*Status bijgewerkt 16 aug 2026. Geen enkele week is op eigen voorwaarden af — de vinkjes
+staan bewust open waar dat zo is. Wat er wél ligt staat per week vermeld.*
+
 - [x] **Week 1 (30 jul – 5 aug):** setup afronden · CS50P start (variabelen, condities, loops, functies) · [prompt 1](prompts/01-python-learning-partner.md) vanaf dag 1 gebruiken
 - [ ] **Week 2 (6 – 12 aug):** CS50P collections + file handling/JSON · GitHub Skills · een week lang alles via de terminal doen
+  - ✅ In deze week gedaan: **Exceptions** (4/4, een week-3-item) en start **Libraries**
+  - ✅ Ingehaald in week 3: **File I/O/JSON** — kwam bij CS50P pas in college 6
+  - ⬜ Open: GitHub Skills
 - [ ] **Week 3 (13 – 19 aug):** CS50P exceptions, lichte OOP, venv/pip · **build: CLI-tool** (expense tracker die naar JSON leest/schrijft, 60–100 regels eigen code)
+  - ✅ Exceptions was al af in week 2
+  - ✅ **Libraries** (6/6), **Unit Tests** (4/4) en **File I/O** (4/4) — CS50P t/m college 6 is af
+  - ⬜ Open: lichte OOP · venv/pip · **de CLI-tool — de belangrijkste van de drie**
+  - 🔨 **Nu aan de beurt: de expense tracker.** Alle CS50P-bouwstenen die hij nodig heeft
+    liggen er; er is geen college meer dat je eerst moet doen.
 - [ ] **Week 4 (20 – 26 aug):** HTTP/API's/`requests` · **build: script dat Open-Meteo aanroept** en het resultaat netjes print · SQLBolt afronden
+  - ⬜ Nog niet gestart — al wel een eerste echte `requests`-aanroep gedaan in Bitcoin Price Index
+
+### CS50P — volgorde en diepte
+
+*Vastgelegd 14 aug 2026, status bijgewerkt 16 aug 2026.*
+
+**Waarom de weekindeling hierboven niet gelijkloopt met CS50P.** CS50P ordent op didactiek,
+de weekindeling ordent op wat de build nodig heeft. Week 1 valt toevallig samen met college
+0–2, daarna klapt het uit elkaar: Exceptions staat bij CS50P op plek 3 maar hierboven in
+week 3 (je loopt vóór), File I/O staat bij CS50P op plek 6 maar hierboven in week 2 (je
+loopt achter). CS50P doet dat bewust — `try/except` komt vóór bestanden openen omdat je het
+nodig hebt om een bestand veilig te openen. Collections, HTTP en SQL zijn géén CS50P-colleges;
+die komen uit andere resources. Er is dus geen 1-op-1 mapping te maken en die hoeft er ook
+niet te zijn.
+
+**De regel vanaf hier: doe elke pset, niet elke opdracht.** Binnen één pset zijn de opdrachten
+grotendeels dezelfde beweging herhaald — bij Libraries is het vijf keer "lees de docs,
+importeer, roep aan". De derde leert je nog iets, de zesde niet meer. Voor de psets zélf geldt
+dat niet: die introduceren elk iets nieuws, dus daar sla je niks over.
+
+| # | College | Status | Diepte | Waarom |
+|---|---|---|---|---|
+| 0 | Functions, Variables | ✅ 5/4 | volledig | kerntaal |
+| 1 | Conditionals | ✅ 5/5 | volledig | kerntaal |
+| 2 | Loops | ✅ 5/5 | volledig | kerntaal |
+| 3 | Exceptions | ✅ 4/4 | volledig | kerntaal — 1,5 week vóór op de weekindeling |
+| 4 | Libraries | ✅ 6/6 | 2–3 van de 6 was genoeg | alle zes gedaan — meer dan het plan vroeg. Bitcoin Price Index was de waardevolle: `requests` + JSON + een echte API-key |
+| 5 | Unit Tests | ✅ 4/4 | afmaken | kort, en `pytest` mocht inslijten |
+| 6 | **File I/O** | ✅ 4/4 | **alle** | geen enkele overgeslagen — voorwaarde voor de expense tracker |
+| 7 | Regular Expressions | ⬜ | 2 van de 4 | genoeg om te weten dat het bestaat en waar je het opzoekt |
+| 8 | OOP | ⬜ | 1–2 van de 3 | "genoeg om andermans code te lezen", meer vraagt deze roadmap niet |
+| 9 | Et Cetera | ⬜ | college wel, psets optioneel | om venv/pip gaat het — zonder venv geen SDK's in maand 2 |
+
+Het CS50P **final project** slaan we over: dat is er voor het certificaat, en dat doen we niet
+(zie de losse beslissing daarover). De expense tracker is het eindproject.
+
+**Volgorde voor de rest van maand 1:**
+
+1. ~~Unit Tests afmaken (die 2)~~ ✅ 16 aug
+2. ~~File I/O, volledig~~ ✅ 16 aug
+3. 🔨 **Bouw de expense tracker.** ← *hier sta je nu.* Stop hier even met colleges — dit is
+   waar 3, 5 en 6 samenkomen: exceptions voor kapotte input, File I/O voor de JSON, unit
+   tests voor je eigen functies
+4. College 9, venv/pip
+5. Week 4: HTTP/`requests` + Open-Meteo script + SQLBolt
+6. Regex en OOP ertussendoor — niet op het kritieke pad
+
+De afweging die vanaf nu geldt: nóg een CS50P-college levert minder op dan het eerste uur aan
+de expense tracker. Tot en met File I/O ben je volledig, daarna word je selectief.
+
+### Overige resources — hoeveel is genoeg
+
+*Vastgelegd 14 aug 2026. Zelfde principe als bij CS50P: elke resource hierboven is groter dan
+wat deze roadmap ervan vraagt. Hieronder staat per resource waar de grens ligt.*
+
+**SQLBolt — lessen 1 t/m 12 van de ~20.**
+
+De roadmap vraagt letterlijk `SELECT, WHERE, GROUP BY, JOIN, ORDER BY` en niet meer. Dat is
+exact de eerste helft van SQLBolt.
+
+| Lessen | Onderwerp | Doen? |
+|---|---|---|
+| 1–12 | SELECT · WHERE · ORDER BY · JOINs · NULLs · aggregates/GROUP BY · HAVING · volgorde van uitvoering | **Ja, alle 12** — dit is de opdracht |
+| 13–15 | INSERT, UPDATE, DELETE | Bonus, ~15 min. Nuttig zodra je zelf iets opslaat |
+| 16–18 | CREATE / ALTER / DROP TABLE | Overslaan — databasebeheer, niet jouw vak nu |
+| Extra topics | Subqueries, UNION | Overslaan tot je ze nodig hebt |
+
+Les 12 (*Order of execution of a Query*) is de waardevolste van de twaalf: daar klikt `WHERE`
+versus `HAVING`. Niet overslaan omdat hij saai oogt. De scheidslijn die telt: **lezen uit een
+database hoort erbij, schrijven en tabellen aanmaken niet.**
+
+**GitHub Skills — de intro-cursus, plus de merge-conflict-cursus.**
+Sla alles over dat over Actions, Pages of deployment gaat. Je hebt de kernlus nodig
+(`init/add/commit/push/pull`) en branching/merging. De rest is CI/CD en dat is een ander vak.
+
+**MDN HTTP — alléén de "Overview"-pagina.**
+De HTTP-sectie van MDN is tientallen pagina's diep. Lees de Overview één keer door en gebruik
+de statuscode-referentie daarna als opzoekpagina, niet als leesvoer.
+
+**Python `requests` — alléén de Quickstart.**
+Eén pagina. "Advanced Usage" heb je pas nodig als je iets tegenkomt dat het vraagt.
+
+**Terminal — geen cursus afmaken.**
+De commando's uit de lijst hierboven en daarna erin leven, zoals de roadmap zegt. Missing
+Semester is naslag voor later, geen week-4-huiswerk.
+
+### Verdiepen — begrippen die deze roadmap niet uitlegt
+
+*Toegevoegd 14 aug 2026 op basis van de vragen die tijdens maand 1 opkwamen. De roadmap noemt
+deze termen als bullet point alsof je ze al kent. Voor een beginner zijn het gaten.*
+
+- [x] **Environment variable** — uitgelegd 14 aug, **in de praktijk gebruikt 16 aug**. Een
+      waarde die búiten je programma leeft en die je code opvraagt in plaats van bevat.
+      Bestaat zodat je API-keys niet in je repo belanden. `export` geldt alleen in het venster
+      waarin je het typt — daarom `.env` + `python-dotenv`, en `.env` altijd in `.gitignore`.
+      Echte toepassing: `cs50/Libraries/bitcoin/bitcoin.py` haalt zijn CoinCap-key uit
+      `COINCAP_API_KEY` in plaats van uit de code.
+- [ ] **Virtual environment (venv)** — zelfde familie als de env var: iets buiten je code dat
+      bepaalt hoe hij draait. Staat als week 3-item in de planning en is nog niet gedaan.
+      Zonder dit installeer je in maand 2 geen enkele SDK. **Eerstvolgende om op te pakken.**
+- [ ] **Branching en merging** — je werkt tot nu toe alleen op `main`. Het begrip is pas echt
+      te snappen als je een keer een merge-conflict hebt veroorzaakt en opgelost.
+- [ ] **`async`/`await`** — de roadmap zegt "weet dat het bestaat" en legt niet uit wát er dan
+      bestaat. Eén alinea is genoeg; deze hoeft niet vóór maand 2 af.
+- [ ] **Wat een HTTP-request/response fysiek ís** — de roadmap springt meteen naar
+      statuscodes (200/401/429/500). Die lijst is pas betekenisvol als het onderliggende
+      model klopt. Hoort bij week 4.
 
 ### Build targets
 
