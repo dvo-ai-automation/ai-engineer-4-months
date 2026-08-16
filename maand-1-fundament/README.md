@@ -24,9 +24,15 @@ Laat het uitleggen, jíj typt.
 
 ## Weekplanning
 
+*Bijgewerkt 16 aug 2026. Voor waaróm dit niet gelijkloopt met de CS50P-colleges, en hoe diep
+je per college moet gaan: [CS50P — volgorde en diepte](../ROADMAP.md#cs50p--volgorde-en-diepte).*
+
 - [x] **Week 1 (30 jul – 5 aug)** — setup afronden · CS50P: variabelen, condities, loops, functies
 - [ ] **Week 2 (6 – 12 aug)** — CS50P: collections, file handling, JSON · GitHub Skills · een week lang alles via de terminal
+  - ✅ Gedaan: Exceptions (4/4) · start Libraries — ⬜ open: GitHub Skills
 - [ ] **Week 3 (13 – 19 aug)** — CS50P: exceptions, lichte OOP, venv/pip · build de CLI-tool
+  - ✅ Gedaan: Libraries (6/6) · Unit Tests (4/4) · File I/O (4/4) — CS50P t/m college 6 is af
+  - 🔨 Nu aan de beurt: **de expense tracker** — ⬜ daarna: OOP · venv/pip
 - [ ] **Week 4 (20 – 26 aug)** — HTTP/API's/`requests` · build het API-script · SQLBolt
 
 ## Builds
