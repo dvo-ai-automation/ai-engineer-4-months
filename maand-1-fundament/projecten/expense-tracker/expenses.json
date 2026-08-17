@@ -1,4 +1,17 @@
 [
-  {"bedrag": 12.50, "datum": "2026-08-17", "opmerking": "koffie"},
-  {"bedrag": 43.20, "datum": "2026-08-17", "opmerking": "boodschappen"}
+  {
+    "bedrag": 12.5,
+    "datum": "2026-08-17",
+    "opmerking": "koffie"
+  },
+  {
+    "bedrag": 43.2,
+    "datum": "2026-08-17",
+    "opmerking": "boodschappen"
+  },
+  {
+    "bedrag": 50.0,
+    "datum": "2026-09-17",
+    "opmerking": "koffie"
+  }
 ]
