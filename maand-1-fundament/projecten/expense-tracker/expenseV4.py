@@ -33,18 +33,18 @@ def valideer_input(argument):
         for deel in range(len(delen)):
             delen[deel] = delen[deel].strip()
 
+        try:
+            bedrag = float(delen[0])
+        except ValueError:
+            print("Bedraginvoer was onjuist")
+            return False
+
         if len(delen) < 3:
             print("Te weinig data")
             return False
         
         if len(delen) > 3:
             print("Te veel data")
-            return False
-        
-        try:
-            bedrag = float(delen[0])
-        except ValueError:
-            print("Bedraginvoer was onjuist")
             return False
         
         try:
