@@ -86,3 +86,8 @@ Artikel: *"You can go from zero to hireable AI engineer in 4 months. Here's the 
 — @free_ai_guides, 7 juli 2026 · https://x.com/i/article/2074513567701680128
 
 Vragen, of loop je hetzelfde pad? Open gerust een [issue](https://github.com/dvo-ai-automation/ai-engineer-4-months/issues).
+
+## Licentie
+
+[MIT](LICENSE) — pak eruit wat je kunt gebruiken. Kopieer de roadmap, fork het dashboard,
+leen de projectopzet. Naamsvermelding wordt gewaardeerd, maar hoeft niet.
