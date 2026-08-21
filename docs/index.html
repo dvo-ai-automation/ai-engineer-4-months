@@ -277,7 +277,7 @@ const MODS = [
   doel:"Een functionele Python-developer worden die een API kan aanroepen, een klein project kan beheren en niet meer hoeft te googelen op basissyntax. Niet expert. Functioneel.",
   intro:"AI engineering is éérst software engineering. Als deze laag wankelt, wordt de AI-laag nooit betrouwbaar. Dit is het minst spannende deel van de vier maanden en tegelijk het moeilijkste, omdat de meeste mensen hier afhaken.",
   blokken:[
-    { t:"Python", i:"Fundament van de taal (pick: CS50P, Harvard). Alles wat je vanaf Maand 2 met AI-API's doet staat bovenop deze basis. LET OP — de weekindeling van deze roadmap loopt bewust niet gelijk met de CS50P-colleges: CS50P ordent op didactiek, de roadmap op wat de build nodig heeft. Exceptions staat bij CS50P op plek 3 maar in de roadmap in week 3 (je loopt vóór); File I/O staat bij CS50P op plek 6 maar in de roadmap in week 2 (je loopt achter). Dat is geen fout, en collections/HTTP/SQL zijn überhaupt geen CS50P-colleges. De regel vanaf hier: DOE ELKE PSET, NIET ELKE OPDRACHT — binnen één pset is het grotendeels dezelfde beweging herhaald, dus de derde opdracht leert je nog iets en de zesde niet meer. Voor de psets zelf geldt dat niet: die introduceren elk iets nieuws. Het CS50P final project slaan we over (dat is er voor het certificaat); de expense tracker hieronder is je eindproject. Status per 16 aug 2026: CS50P 0 t/m 6 is af.",
+    { t:"Python", i:"Fundament van de taal (pick: CS50P, Harvard). Alles wat je vanaf Maand 2 met AI-API's doet staat bovenop deze basis. LET OP — de weekindeling van deze roadmap loopt bewust niet gelijk met de CS50P-colleges: CS50P ordent op didactiek, de roadmap op wat de build nodig heeft. Exceptions staat bij CS50P op plek 3 maar in de roadmap in week 3 (je loopt vóór); File I/O staat bij CS50P op plek 6 maar in de roadmap in week 2 (je loopt achter). Dat is geen fout, en collections/HTTP/SQL zijn überhaupt geen CS50P-colleges. De regel vanaf hier: DOE ELKE PSET, NIET ELKE OPDRACHT — binnen één pset is het grotendeels dezelfde beweging herhaald, dus de derde opdracht leert je nog iets en de zesde niet meer. Voor de psets zelf geldt dat niet: die introduceren elk iets nieuws. Het CS50P final project slaan we over (dat is er voor het certificaat); de expense tracker hieronder is je eindproject. Status per 21 aug 2026: CS50P 0 t/m 6 is af en de expense tracker draait, inclusief tests.",
       taken:[
         ["CS50P 0 — Functions, Variables: einstein, faces, indoor, playback, tip","VOLLEDIG. Alle opdrachten van dit pset staan als eigen bestanden in je repo (maand-1-fundament/cs50/Functions, Variables/). Kerntaal, dus hier hoort niks overgeslagen te worden.",[["CS50P · Harvard (gratis)","https://cs50.harvard.edu/python/"]]],
         ["CS50P 1 — Conditionals: bank, deep, extensions, interpreter, meal","VOLLEDIG, 5 van de 5. Staan allemaal in je repo (maand-1-fundament/cs50/Conditionals/).",[]],
@@ -705,12 +705,13 @@ const BRONNEN = [
   ["OpenAI — embeddings guide","https://platform.openai.com/docs/guides/embeddings"]
 ];
 
-/* Week 3 (13-19 aug) is de actieve week; bijgewerkt op 14 aug 2026. */
+/* Week 4 (20-26 aug) is de actieve week; bijgewerkt op 21 aug 2026. */
 const WEEK1 = [
-  "BOUW DE EXPENSE TRACKER. Dit is waar 3, 5 en 6 samenkomen: exceptions voor kapotte input, File I/O voor de JSON, unit tests voor je eigen functies. Er is geen college meer dat je eerst moet doen",
-  "CS50P 9 — Et Cetera: venv en pip. Zonder venv installeer je in Maand 2 geen enkele SDK",
+  "BOUW DE WEATHER CLI. Open-Meteo aanroepen met requests, het JSON-antwoord uitpakken en schoon printen. De venv staat en requests is geïnstalleerd — er is geen college meer dat je eerst moet doen",
+  "Snap wat een HTTP-request fysiek is vóór je de statuscodes leert. Die lijst (200/401/429/500) betekent pas iets als het onderliggende model klopt",
+  "SQLBolt lessen 1 t/m 12 — het laatste blok van maand 1 en volledig los van de rest, dus ideaal voor een avond met weinig energie",
+  "Laat de expense tracker zijn tests uit expenseV4 halen in plaats van V3, en vang een ontbrekende expenses.json af",
   "GitHub Skills — het laatste openstaande week-2-restje",
-  "Branching en merging in de praktijk: deze repo draait sinds 16 aug op een aparte branch",
   "CS50P 7 (regex) en 8 (OOP) ertussendoor — niet op het kritieke pad"
 ];
 
@@ -741,11 +742,11 @@ const TIJDLIJN_ANCHORS = [15,20,25];
 /* ======================= STATE ======================= */
 const LS_KEY = "aiengineer_roadmap_v1";
 
-/* Snapshot van je echte repo op 6 aug 2026 (git log): de CS50P-opdrachten die al als
+/* Snapshot van je echte repo op 21 aug 2026 (git log): de CS50P-opdrachten en de build die al als
    bestand in maand-1-fundament/cs50/ staan. DASHBOARD-TOEVOEGING — vult de eerste keer
    dat je dit dashboard opent alvast in wat je al hebt gedaan, in plaats van bij 0% te
    beginnen. Werkt alleen bij het allereerste bezoek; daarna is jouw afvinkgedrag leidend. */
-const SEED_SNAPSHOT_DATUM = "16 augustus 2026";
+const SEED_SNAPSHOT_DATUM = "21 augustus 2026";
 const SEED_DONE = [
   taskKeyRaw("m1",0,0), // CS50P 0 Functions,Variables — einstein, faces, indoor, playback, tip
   taskKeyRaw("m1",0,1), // CS50P 1 Conditionals — bank, deep, extensions, interpreter, meal
@@ -757,7 +758,10 @@ const SEED_DONE = [
   taskKeyRaw("m1",1,0), // Git kernlus — blijkt uit de commit-history van deze repo
   taskKeyRaw("m1",1,2), // .gitignore + secrets erbuiten — .gitignore + bitcoin.py via COINCAP_API_KEY
   taskKeyRaw("m1",1,3), // basis-README — README.md in de root en per maandmap
-  taskKeyRaw("m1",2,3)  // environment variable gezet — COINCAP_API_KEY voor bitcoin.py
+  taskKeyRaw("m1",2,3), // environment variable gezet — COINCAP_API_KEY voor bitcoin.py
+  taskKeyRaw("m1",0,9), // CS50P 9 venv/pip — .venv + requirements.txt per project
+  taskKeyRaw("m1",1,1), // branching en merging — de dashboard-branch, gemerged op 16 aug
+  "m1|build|0"          // BUILD expense tracker — af op 20 aug, 87 regels + 5 unit tests
 ];
 function taskKeyRaw(m,b,i){ return m+"|"+b+"|"+i; }
 
@@ -886,7 +890,7 @@ function renderOverzicht(){
   const seedBanner = (SEEDED && doneAll>0) ? `
     <div class="box build" style="margin-bottom:16px">
       <span class="box-lbl">Automatisch ingevuld</span>
-      De ${SEED_DONE.length} onderdelen die aantoonbaar in de repo staan zijn alvast aangevinkt: CS50P 0 t/m 6 als eigen bestanden, plus de Git- en terminalpunten die uit de commit-history en uit <code>bitcoin.py</code> blijken. Alleen wat te controleren is in de repo staat hier voorgevinkt — de rest vink je zelf af.
+      De ${SEED_DONE.length} onderdelen die aantoonbaar in de repo staan zijn alvast aangevinkt: CS50P 0 t/m 6 als eigen bestanden, de afgeronde expense tracker, plus de Git- en terminalpunten die uit de commit-history en uit <code>bitcoin.py</code> blijken. Alleen wat te controleren is in de repo staat hier voorgevinkt — de rest vink je zelf af.
     </div>` : "";
 
   el.innerHTML = `
