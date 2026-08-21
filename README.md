@@ -1,6 +1,6 @@
 # Van nul naar AI engineer in 4 maanden
 
-Op 30 juli 2026 schreef ik mijn eerste regel Python. Op 18 november wil ik inzetbaar zijn als
+Op 30 juli 2026 schreef ik mijn eerste regel Python. Op 18 november wil ik nog beter inzetbaar zijn als
 AI engineer. Alles wat ik onderweg bouw staat in deze repo — de werkende dingen en de lelijke,
 op de dag dat ze af zijn.
 
@@ -60,7 +60,7 @@ De vier maanden lopen van 30 juli t/m 18 november 2026, bij 15–25 uur per week
 | [maand-1-fundament/](maand-1-fundament/) | Python, Git, terminal, API's, SQL — **nu bezig** |
 | [maand-2-llm-apis/](maand-2-llm-apis/) | Prompting, structured outputs, tool calling, streaming |
 | [maand-3-rag-agents/](maand-3-rag-agents/) | RAG, vector-DB's, agents, evals |
-| [maand-4-ship-it/](maand-4-ship-it/) | Deployment, portfolio, baan |
+| [maand-4-ship-it/](maand-4-ship-it/) | Deployment, portfolio, basis voor meer uitdagende projecten |
 | [ROADMAP.md](ROADMAP.md) | Het plan: doel, de twee regels, de vier valkuilen |
 | [prompts/](prompts/) | De prompts waarmee ik mezelf laat begeleiden |
 | [docs/](docs/) | Het dashboard hierboven — één self-contained HTML-bestand |
@@ -70,7 +70,7 @@ Elke `projecten/`-map bevat de builds van die maand, elk project met een eigen R
 
 ---
 
-## De twee regels waar alles op rust
+## De twee regels waar alles op staat
 
 1. **De 30-minutenregel** — per uur kijken of lezen minstens 30 minuten bouwen zónder tutorial open.
 2. **Alles gaat publiek** — elk project op GitHub op de dag dat het af is, ook de lelijke.
@@ -80,7 +80,7 @@ De tweede is de moeilijkste en de belangrijkste. Daarom staat in elke project-RE
 
 ---
 
-## Bron
+## Wil je het originele artikel lezen?
 
 Artikel: *"You can go from zero to hireable AI engineer in 4 months. Here's the exact path."*
 — @free_ai_guides, 7 juli 2026 · https://x.com/i/article/2074513567701680128
