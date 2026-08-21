@@ -1,11 +1,11 @@
-# Maand 4 — Shippen, laten zien, nieuwe projecten
+# Maand 4: Shippen, laten zien, in productie brengen
 
 **22 oktober – 18 november 2026**
 
-**Doel:** alles wat je gebouwd hebt echt maken, en omzetten in waardevolle projecten.
+**Doel:** alles wat je gebouwd hebt echt maken: gedeployed, betaalbaar en zichtbaar.
 Weinig nieuwe concepten, veel doen.
 
-Volledige uitwerking: [../ROADMAP.md](../ROADMAP.md#maand-4--shippen-laten-zien-betaald-worden-22-okt--18-nov)
+Volledige uitwerking: [tabblad Roadmap in het dashboard](https://dvo-ai-automation.github.io/ai-engineer-4-months/) · [ROADMAP.md](../ROADMAP.md)
 
 ## Resources
 
@@ -23,9 +23,9 @@ Volledige uitwerking: [../ROADMAP.md](../ROADMAP.md#maand-4--shippen-laten-zien-
 
 ## Richting kiezen (één)
 
-- [ ] **AI product engineer** — direct waarde leveren bij een klant
-- [ ] **Applied ML** — fine-tuning, Ollama, inference-optimalisatie
-- [ ] **AI automation** — n8n + LangGraph, bedrijfsworkflows zoals lead-qualification
+- [ ] **AI product engineer**: complete, gepolijste producten
+- [ ] **Applied ML**: fine-tuning, Ollama, inference-optimalisatie
+- [ ] **AI automation**: n8n + LangGraph, bedrijfsworkflows, lead-qualification als complete build
 
 ## Milestone
 

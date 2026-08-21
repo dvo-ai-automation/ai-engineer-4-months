@@ -1,11 +1,11 @@
-# Maand 2 — Bouwen met LLM-API's
+# Maand 2: Bouwen met LLM-API's
 
 **27 augustus – 23 september 2026**
 
-**Doel:** echte AI-features bouwen met model-API's. Dit is de kern van het vak — diepte hier
+**Doel:** echte AI-features bouwen met model-API's. Dit is de kern van het vak. Diepte hier
 betaalt zich meer terug dan diepte waar dan ook in het traject.
 
-Volledige uitwerking: [../ROADMAP.md](../ROADMAP.md#maand-2--bouwen-met-llm-apis-27-aug--23-sep)
+Volledige uitwerking: [tabblad Roadmap in het dashboard](https://dvo-ai-automation.github.io/ai-engineer-4-months/) · [ROADMAP.md](../ROADMAP.md)
 
 ## Resources
 
@@ -18,14 +18,14 @@ Volledige uitwerking: [../ROADMAP.md](../ROADMAP.md#maand-2--bouwen-met-llm-apis
 
 ## Gereedschap
 
-[Prompt 2 — Structured Data Extraction](../prompts/02-structured-data-extraction.md)
+[Prompt 2: Structured Data Extraction](../prompts/02-structured-data-extraction.md)
 
 ## Builds
 
-- [ ] `projecten/prompt-vergelijking/` — één taak, vijf prompts, outputs naast elkaar
-- [ ] `projecten/invoice-parser/` — rommelige tekst in, schoon gestructureerd object uit (portfoliostuk)
-- [ ] `projecten/mini-assistent/` — drie tools: `get_weather`, `calculate`, `search_notes`
-- [ ] `projecten/terminal-chatbot/` — multi-turn met history en reset-commando
+- [ ] `projecten/prompt-vergelijking/`: één taak, vijf prompts, outputs naast elkaar
+- [ ] `projecten/invoice-parser/`: rommelige tekst in, schoon gestructureerd object uit (portfoliostuk)
+- [ ] `projecten/mini-assistent/`: drie tools: `get_weather`, `calculate`, `search_notes`
+- [ ] `projecten/terminal-chatbot/`: multi-turn met history en reset-commando
 
 ## Milestone
 

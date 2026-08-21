@@ -1,5 +1,5 @@
 import pytest
-from expenseV3 import valideer_input, aanvullen, totaal_optellen, maand_optellen
+from expenseV4 import valideer_input, aanvullen, totaal_optellen, maand_optellen
 
 def test_ongeldig_bedrag():
     assert valideer_input("cat 2026-08-19, koffie") == False

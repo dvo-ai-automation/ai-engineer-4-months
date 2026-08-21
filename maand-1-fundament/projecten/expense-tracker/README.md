@@ -1,7 +1,7 @@
 # Expense tracker
 
 Een CLI-tool die uitgaven aanneemt, ze valideert, wegschrijft naar JSON en bij het afsluiten
-je totaal van vandaag en van deze maand teruggeeft. 87 regels eigen Python, 5 unit tests,
+je totaal van vandaag en van deze maand teruggeeft. 62 regels code, 5 unit tests,
 geen dependencies buiten de standaardbibliotheek.
 
 Dit is de eindbuild van maand 1. Hij brengt samen wat CS50P 3, 5 en 6 los aanleerden:
@@ -30,7 +30,7 @@ Totale uitgaven deze maand is: €43.10
 ```
 
 De regel met `kat` erin is het punt: foute invoer laat het programma niet crashen. Hij zegt
-wat er mis is en vraagt opnieuw. Vijf soorten kapotte input worden opgevangen — geen getal,
+wat er mis is en vraagt opnieuw. Vijf soorten kapotte input worden opgevangen: geen getal,
 verkeerd datumformaat, te weinig velden, te veel velden, en `Ctrl+D` als afsluiter.
 
 ## Zelf draaien
@@ -56,7 +56,7 @@ regel van dit traject is dat alles publiek gaat, ook de lelijke tussenstappen.
 
 | Bestand | Wat erbij kwam |
 |---|---|
-| `expenseV1.py` | Eén input uitlezen en terugprinten. 10 regels. |
+| `expenseV1.py` | Eén input uitlezen en terugprinten. 6 regels code. |
 | `expenseV2.py` | Input opsplitsen in bedrag/datum/opmerking, functies aanroepen, optellen. |
 | `expenseV3.py` | Validatie met `try`/`except`, opslag in JSON, totalen per dag en per maand. |
 | `expenseV4.py` | **De werkende versie.** Maandtotaal telt nu op `%Y-%m` in plaats van een hardcoded `2026-`. |
@@ -72,7 +72,7 @@ De sprong van V2 naar V3 is waar het echte werk zit: daar ging het van "leest in
 - **`try`/`except` rond precies één ding.** `float()` en `datetime.strptime()` hebben elk hun
   eigen blok, zodat de foutmelding kan zeggen wát er mis was.
 - **Testen dwingt je functies uit elkaar te trekken.** Ik kon `valideer_input()` alleen
-  testen omdat hij niets print en niets opslaat — hij rekent en geeft terug. Dat had ik niet
+  testen omdat hij niets print en niets opslaat: hij rekent en geeft terug. Dat had ik niet
   bedacht vóór ik de tests schreef.
 - **`with open(...)` doet het sluiten voor je**, en `json.dump(..., indent=2)` houdt het
   bestand leesbaar voor een mens.
@@ -81,8 +81,9 @@ De sprong van V2 naar V3 is waar het echte werk zit: daar ging het van "leest in
 
 Eerlijk, want dit is een leerlogboek en niet een etalage:
 
-- `test_expense.py` importeert nog uit `expenseV3`, terwijl `expenseV4` de werkende versie is.
-  De tests slagen, maar ze dekken de verkeerde file.
+- De 5 tests dekken alleen `valideer_input()`. `aanvullen()`, `totaal_optellen()` en
+  `maand_optellen()` worden wel geïmporteerd maar nooit getest, want die raken het JSON-bestand
+  aan. Daar hoort pytest's `tmp_path` omheen, zodat een test op een wegwerpbestand draait.
 - Het pad naar `expenses.json` is relatief, dus het programma werkt alleen als je hem start
   vanuit deze map.
 - `aanvullen()` crasht als `expenses.json` niet bestaat of leeg is. Er hoort een `try`/`except`

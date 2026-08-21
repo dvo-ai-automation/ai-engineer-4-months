@@ -1,4 +1,4 @@
-# Prompt 3 — Grounded RAG Answering
+# Prompt 3: Grounded RAG Answering
 
 - **Framework:** FAG Grounding, by AI Guides
 - **Bron:** artikel "You can go from zero to hireable AI engineer in 4 months" (@free_ai_guides, 7 juli 2026)

@@ -2,6 +2,10 @@ import os
 import requests
 import sys
 
+from dotenv import load_dotenv
+
+load_dotenv()
+
 API_KEY = os.getenv("COINCAP_API_KEY")
 
 if len(sys.argv) == 2:
@@ -14,7 +18,11 @@ if len(sys.argv) == 2:
         sys.exit("Need a number 'n'")
 
     try:
-        r = requests.get(f'https://rest.coincap.io/v3/assets/bitcoin?apiKey={API_KEY}')
+        r = requests.get(
+            "https://rest.coincap.io/v3/assets/bitcoin",
+            headers={"Authorization": f"Bearer {API_KEY}"},
+            timeout=10,
+        )
         json = r.json()
         btc = float(json["data"]["priceUsd"]) * n
         print(f"${btc:,.4f}")

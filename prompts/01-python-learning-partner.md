@@ -1,4 +1,4 @@
-# Prompt 1 — Python Learning Partner
+# Prompt 1: Python Learning Partner
 
 - **Framework:** FAG Learning Partner, by AI Guides
 - **Bron:** artikel "You can go from zero to hireable AI engineer in 4 months" (@free_ai_guides, 7 juli 2026)

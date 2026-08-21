@@ -1,3 +1,13 @@
+"""Kladbestand, geen onderdeel van de expense tracker.
+
+Dit is de validatielus zoals ik hem eerst schreef: alles in een while-loop, niets in een
+functie. Precies dat maakte hem ontestbaar. In expenseV3 is dit uit elkaar getrokken naar
+valideer_input(), en pas daarna kon test_expense.py er iets zinnigs mee.
+
+Bewaard omdat de tussenstap laat zien waaróm die functie er kwam. Draait niet vanuit deze
+map: hij verwacht expenses.json naast zich.
+"""
+
 import json
 from datetime import datetime
 

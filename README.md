@@ -1,8 +1,8 @@
 # Van nul naar AI engineer in 4 maanden
 
-Op 30 juli 2026 schreef ik mijn eerste regel Python. Op 18 november wil ik nog beter inzetbaar zijn als
-AI engineer. Alles wat ik onderweg bouw staat in deze repo — de werkende dingen en de lelijke,
-op de dag dat ze af zijn.
+Op 30 juli 2026 schreef ik mijn eerste regel Python. Op 18 november wil ik zelfstandig
+AI-systemen kunnen bouwen, deployen en repareren. Alles wat ik onderweg bouw staat in deze
+repo: de werkende dingen en de lelijke, op de dag dat ze af zijn.
 
 Geen cursus die ik verkoop, geen samenvatting achteraf. Een logboek dat meeloopt.
 
@@ -17,7 +17,7 @@ Voortgang per skill, de bouwopdrachten, de valkuilen en de mijlpalen van alle vi
 **Loop je hetzelfde pad, of overweeg je het?** Dan is dit een uitgeschreven plan met de
 resources er al bij uitgekozen, plus een eerlijk beeld van hoe lang dingen echt duren. Het
 [dashboard](https://dvo-ai-automation.github.io/ai-engineer-4-months/) is te kopiëren en de
-[ROADMAP](ROADMAP.md) vertelt je welke vier fouten dit soort switches meestal beëindigen.
+[ROADMAP](ROADMAP.md) vertelt je welke vier fouten dit soort trajecten meestal beëindigen.
 In [`prompts/`](prompts/) staan de prompts waarmee ik mezelf laat begeleiden in plaats van
 antwoorden te laten voorzeggen.
 
@@ -33,7 +33,7 @@ niet alleen wat ik kan, maar hoe snel het gaat.
 
 | Project | Wat het doet | Bewijs |
 |---|---|---|
-| [**Expense tracker**](maand-1-fundament/projecten/expense-tracker/) | CLI-tool die uitgaven valideert, wegschrijft naar JSON en dag- en maandtotalen teruggeeft. Vangt vijf soorten kapotte input op zonder te crashen. | 62 regels · 5 unit tests · stdlib only |
+| [**Expense tracker**](maand-1-fundament/projecten/expense-tracker/) | CLI-tool die uitgaven valideert, wegschrijft naar JSON en dag- en maandtotalen teruggeeft. Vangt vijf soorten kapotte input op zonder te crashen. | 62 regels code · 5 unit tests · stdlib only |
 | [**Bitcoin Price Index**](maand-1-fundament/cs50/Libraries/bitcoin/) | Haalt de live BTC-koers op via een externe API, met de key uit een environment variable in plaats van uit de code. | `requests` · JSON · `.env` |
 | [`maand-1-fundament/cs50/`](maand-1-fundament/cs50/) | 33 opgeloste CS50P-opdrachten, college 0 t/m 6. | incl. 4 eigen testsuites |
 
@@ -41,7 +41,7 @@ niet alleen wat ik kan, maar hoe snel het gaat.
 
 ## Waar ik nu sta
 
-**Maand 1 — Python en de plumbing** · week 4 van 4 · *bijgewerkt 21 aug 2026*
+**Maand 1: Python en de plumbing** · week 4 van 4 · *bijgewerkt 21 aug 2026*
 
 | | |
 |---|---|
@@ -57,37 +57,37 @@ De vier maanden lopen van 30 juli t/m 18 november 2026, bij 15–25 uur per week
 
 | Pad | Inhoud |
 |---|---|
-| [maand-1-fundament/](maand-1-fundament/) | Python, Git, terminal, API's, SQL — **nu bezig** |
+| [maand-1-fundament/](maand-1-fundament/) | Python, Git, terminal, API's, SQL · **nu bezig** |
 | [maand-2-llm-apis/](maand-2-llm-apis/) | Prompting, structured outputs, tool calling, streaming |
 | [maand-3-rag-agents/](maand-3-rag-agents/) | RAG, vector-DB's, agents, evals |
-| [maand-4-ship-it/](maand-4-ship-it/) | Deployment, portfolio, basis voor meer uitdagende projecten |
+| [maand-4-ship-it/](maand-4-ship-it/) | Deployment, kostenbeheersing, portfolio |
 | [ROADMAP.md](ROADMAP.md) | Het plan: doel, de twee regels, de vier valkuilen |
 | [prompts/](prompts/) | De prompts waarmee ik mezelf laat begeleiden |
-| [docs/](docs/) | Het dashboard hierboven — één self-contained HTML-bestand |
+| [docs/](docs/) | Het dashboard hierboven, één self-contained HTML-bestand |
 | [notities/](notities/) | Losse aantekeningen en dingen om uit te zoeken |
 
 Elke `projecten/`-map bevat de builds van die maand, elk project met een eigen README.
 
 ---
 
-## De twee regels waar alles op staat
+## De twee regels waar alles op rust
 
-1. **De 30-minutenregel** — per uur kijken of lezen minstens 30 minuten bouwen zónder tutorial open.
-2. **Alles gaat publiek** — elk project op GitHub op de dag dat het af is, ook de lelijke.
+1. **De 30-minutenregel**: per uur kijken of lezen minstens 30 minuten bouwen zónder tutorial open.
+2. **Alles gaat publiek**: elk project op GitHub op de dag dat het af is, ook de lelijke.
 
 De tweede is de moeilijkste en de belangrijkste. Daarom staat in elke project-README een kopje
 "wat er nog niet goed aan is", door mij geschreven en niet weggepoetst.
 
 ---
 
-## Wil je het originele artikel lezen?
+## Bron
 
 Artikel: *"You can go from zero to hireable AI engineer in 4 months. Here's the exact path."*
-— @free_ai_guides, 7 juli 2026 · https://x.com/i/article/2074513567701680128
+@free_ai_guides, 7 juli 2026 · https://x.com/i/article/2074513567701680128
 
 Vragen, of loop je hetzelfde pad? Open gerust een [issue](https://github.com/dvo-ai-automation/ai-engineer-4-months/issues).
 
 ## Licentie
 
-[MIT](LICENSE) — pak eruit wat je kunt gebruiken. Kopieer de roadmap, fork het dashboard,
+[MIT](LICENSE). Pak eruit wat je kunt gebruiken. Kopieer de roadmap, fork het dashboard,
 leen de projectopzet. Naamsvermelding wordt gewaardeerd, maar hoeft niet.

@@ -1,8 +1,8 @@
-# Prompt 2 — Structured Data Extraction
+# Prompt 2: Structured Data Extraction
 
 - **Framework:** FAG Extractor, by AI Guides
 - **Bron:** artikel "You can go from zero to hireable AI engineer in 4 months" (@free_ai_guides, 7 juli 2026)
-- **Wanneer gebruiken:** Maand 2, bij het onderdeel *structured outputs*. Dit patroon werkt al vóórdat je Pydantic/Instructor erbovenop zet — gebruik het bij de bon/invoice-parser.
+- **Wanneer gebruiken:** Maand 2, bij het onderdeel *structured outputs*. Dit patroon werkt al vóórdat je Pydantic/Instructor erbovenop zet; gebruik het bij de bon/invoice-parser.
 - **Bekende faalmodus (uit het artikel):** het model wikkelt de JSON soms in markdown code fences of zet er een vriendelijke zin voor, waardoor je parser stukloopt. Fix: strip de code fences vóór het parsen, én wees expliciet dat je alleen het JSON-object wilt (dit patroon doet dat al).
 
 ## De prompt
