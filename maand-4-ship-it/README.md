@@ -1,8 +1,8 @@
-# Maand 4 — Shippen, laten zien, betaald worden
+# Maand 4 — Shippen, laten zien, nieuwe projecten
 
 **22 oktober – 18 november 2026**
 
-**Doel:** alles wat je gebouwd hebt echt maken, en omzetten in een baan of betaald werk.
+**Doel:** alles wat je gebouwd hebt echt maken, en omzetten in waardevolle projecten.
 Weinig nieuwe concepten, veel doen.
 
 Volledige uitwerking: [../ROADMAP.md](../ROADMAP.md#maand-4--shippen-laten-zien-betaald-worden-22-okt--18-nov)
@@ -23,9 +23,9 @@ Volledige uitwerking: [../ROADMAP.md](../ROADMAP.md#maand-4--shippen-laten-zien-
 
 ## Richting kiezen (één)
 
-- [ ] **AI product engineer** — snelst naar een startup-baan
+- [ ] **AI product engineer** — direct waarde leveren bij een klant
 - [ ] **Applied ML** — fine-tuning, Ollama, inference-optimalisatie
-- [ ] **AI automation** — n8n + LangGraph, bedrijfsworkflows, lead-qualification als verkoopbare build
+- [ ] **AI automation** — n8n + LangGraph, bedrijfsworkflows zoals lead-qualification
 
 ## Milestone
 
