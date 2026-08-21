@@ -33,7 +33,7 @@ niet alleen wat ik kan, maar hoe snel het gaat.
 
 | Project | Wat het doet | Bewijs |
 |---|---|---|
-| [**Expense tracker**](maand-1-fundament/projecten/expense-tracker/) | CLI-tool die uitgaven valideert, wegschrijft naar JSON en dag- en maandtotalen teruggeeft. Vangt vijf soorten kapotte input op zonder te crashen. | 87 regels · 5 unit tests · stdlib only |
+| [**Expense tracker**](maand-1-fundament/projecten/expense-tracker/) | CLI-tool die uitgaven valideert, wegschrijft naar JSON en dag- en maandtotalen teruggeeft. Vangt vijf soorten kapotte input op zonder te crashen. | 62 regels · 5 unit tests · stdlib only |
 | [**Bitcoin Price Index**](maand-1-fundament/cs50/Libraries/bitcoin/) | Haalt de live BTC-koers op via een externe API, met de key uit een environment variable in plaats van uit de code. | `requests` · JSON · `.env` |
 | [`maand-1-fundament/cs50/`](maand-1-fundament/cs50/) | 33 opgeloste CS50P-opdrachten, college 0 t/m 6. | incl. 4 eigen testsuites |
 
