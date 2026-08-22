@@ -8,5 +8,15 @@
     "bedrag": 43.2,
     "datum": "2026-08-17",
     "opmerking": "boodschappen"
+  },
+  {
+    "bedrag": 6.5,
+    "datum": "2026-08-22",
+    "opmerking": "koffie"
+  },
+  {
+    "bedrag": 17.25,
+    "datum": "2026-08-22",
+    "opmerking": "lunch"
   }
 ]
