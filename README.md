@@ -1,8 +1,8 @@
 # Van nul naar AI engineer in 4 maanden
 
-Op 30 juli 2026 schreef ik mijn eerste regel Python. Op 18 november wil ik zelfstandig
-AI-systemen kunnen bouwen, deployen en repareren. Alles wat ik onderweg bouw staat in deze
-repo: de werkende dingen en de lelijke, op de dag dat ze af zijn.
+Op 30 juli 2026 schreef ik mijn eerste regel Python. Op 18 november wil ik nog beter inzetbaar zijn als
+AI engineer. Alles wat ik onderweg bouw staat in deze repo — de werkende dingen en de lelijke,
+op de dag dat ze af zijn.
 
 Geen cursus die ik verkoop, geen samenvatting achteraf. Een logboek dat meeloopt.
 
@@ -33,7 +33,7 @@ niet alleen wat ik kan, maar hoe snel het gaat.
 
 | Project | Wat het doet | Bewijs |
 |---|---|---|
-| [**Expense tracker**](maand-1-fundament/projecten/expense-tracker/) | CLI-tool die uitgaven valideert, wegschrijft naar JSON en dag- en maandtotalen teruggeeft. Vangt vijf soorten kapotte input op zonder te crashen. | 62 regels code · 5 unit tests · stdlib only |
+| [**Expense tracker**](maand-1-fundament/projecten/expense-tracker/) | CLI-tool die uitgaven valideert, wegschrijft naar JSON en dag- en maandtotalen teruggeeft. Vangt vijf soorten kapotte input op zonder te crashen. | 62 regels · 5 unit tests · stdlib only |
 | [**Bitcoin Price Index**](maand-1-fundament/cs50/Libraries/bitcoin/) | Haalt de live BTC-koers op via een externe API, met de key uit een environment variable in plaats van uit de code. | `requests` · JSON · `.env` |
 | [`maand-1-fundament/cs50/`](maand-1-fundament/cs50/) | 33 opgeloste CS50P-opdrachten, college 0 t/m 6. | incl. 4 eigen testsuites |
 
@@ -60,7 +60,7 @@ De vier maanden lopen van 30 juli t/m 18 november 2026, bij 15–25 uur per week
 | [maand-1-fundament/](maand-1-fundament/) | Python, Git, terminal, API's, SQL · **nu bezig** |
 | [maand-2-llm-apis/](maand-2-llm-apis/) | Prompting, structured outputs, tool calling, streaming |
 | [maand-3-rag-agents/](maand-3-rag-agents/) | RAG, vector-DB's, agents, evals |
-| [maand-4-ship-it/](maand-4-ship-it/) | Deployment, kostenbeheersing, portfolio |
+| [maand-4-ship-it/](maand-4-ship-it/) | Deployment, portfolio, basis voor meer uitdagende projecten |
 | [ROADMAP.md](ROADMAP.md) | Het plan: doel, de twee regels, de vier valkuilen |
 | [prompts/](prompts/) | De prompts waarmee ik mezelf laat begeleiden |
 | [docs/](docs/) | Het dashboard hierboven, één self-contained HTML-bestand |
